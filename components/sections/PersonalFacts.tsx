@@ -22,17 +22,14 @@ const markers: { name: string; coords: [number, number] }[] = [
 
 const story = [
   {
-    num: "01",
     title: "International Student",
     body: "Nepal to Nashville is $1,200 and three connections on a good day. Every trip home is a financial equation before it is a reunion. You learn to find routes nobody else would look for, the ones with a six-hour layover in Doha that cut the price in half.",
   },
   {
-    num: "02",
     title: "The Opportunity Hunt",
     body: "Bahrain because it was visa-on-arrival and cheap. The Philippines because a friend had a spare room. Turkey because the layover made the connection cheaper than any direct route. A Nepali passport teaches you to find the opening nobody else looked for.",
   },
   {
-    num: "03",
     title: "The Tools Are Broken",
     body: "Every trip planned across twenty tabs, four apps, and a notes file that falls apart the moment a price changes. The platforms are built for blue passports and fat wallets. The rest of us improvise. That is where offtofly started.",
   },
@@ -142,9 +139,8 @@ export default function PersonalFacts() {
         {/* Story columns */}
         <div className="grid lg:grid-cols-3 gap-10">
           {story.map((s, i) => (
-            <AnimatedSection key={s.num} delay={0.12 + i * 0.1}>
+            <AnimatedSection key={s.title} delay={0.12 + i * 0.1}>
               <div className="space-y-3 lg:px-8 first:lg:pl-0 last:lg:pr-0 pt-8 lg:pt-0 first:pt-0">
-                <p className="eyebrow text-accent">{s.num}</p>
                 <p className="font-display font-semibold text-lg text-slate-800 tracking-tight leading-snug">
                   {s.title}
                 </p>

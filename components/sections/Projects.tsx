@@ -25,10 +25,7 @@ export default function Projects() {
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
                 className="flex h-full flex-col rounded-2xl border border-slate-200 bg-page-surface/90 p-7 shadow-sm transition-shadow duration-300 hover:shadow-lg"
               >
-                <div className="mb-5 flex items-baseline justify-between">
-                  <span className="font-display text-sm text-ink-300">
-                    0{i + 1}
-                  </span>
+                <div className="mb-5 flex items-baseline">
                   <span className="inline-flex items-center gap-1.5 font-body text-xs text-ink-400">
                     <Calendar size={12} /> {proj.date}
                   </span>
