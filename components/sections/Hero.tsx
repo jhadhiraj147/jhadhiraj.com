@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
-import Image from "next/image";
 import { personal } from "@/lib/data";
 
-/* Line-level reveal - clips the whole line up as one unit, no char splitting.
-   Descenders (J, g, y...) are never cut off. Full kerning is preserved. */
+/* Clips a whole line up as one unit. Descenders are never cut, kerning survives. */
 function LineReveal({
   children,
   delay = 0,
@@ -17,6 +14,7 @@ function LineReveal({
   delay?: number;
   className?: string;
 }) {
+  const still = useReducedMotion();
   return (
     <span
       className={`block overflow-hidden ${className}`}
@@ -24,9 +22,9 @@ function LineReveal({
     >
       <motion.span
         className="block"
-        initial={{ y: "108%" }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+        initial={still ? { y: 0, opacity: 0 } : { y: "108%" }}
+        animate={still ? { y: 0, opacity: 1 } : { y: 0 }}
+        transition={{ duration: still ? 0.4 : 1, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.span>
@@ -34,187 +32,114 @@ function LineReveal({
   );
 }
 
+const pill =
+  "inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-sans text-sm font-semibold " +
+  "backdrop-blur-md transition-colors duration-200";
+
 export default function Hero() {
-  const [imgError, setImgError] = useState(false);
+  const still = useReducedMotion();
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-    >
-      {/* Pure white background */}
-      <div className="absolute inset-0 bg-white" />
-
+    <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden">
+      {/* Scrim. Only the lower half is darkened, so the sky the motto sits on stays untouched. */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(8,11,16,0.72) 0%, rgba(8,11,16,0.45) 18%, rgba(8,11,16,0.10) 38%, rgba(8,11,16,0) 55%)",
+        }}
+      />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col px-4 sm:px-6 lg:px-8">
+        {/* The motto, printed on the empty sky in the upper left */}
+        <h1 className="pt-[26vh] sm:pt-[24vh] lg:pt-[21vh]">
+          <LineReveal
+            delay={0.15}
+            className="max-w-[15ch] font-display leading-[0.98] tracking-[-0.02em] text-[#0d1117] text-[clamp(2.6rem,10vw,4rem)] sm:max-w-none sm:text-[clamp(3rem,6.6vw,6.5rem)]"
+          >
+            <span className="font-bold">Your Ideas</span>
+            <span className="font-normal"> will live</span>
+            <br className="hidden sm:inline" />
+            <span className="font-normal"> longer than you.</span>
+          </LineReveal>
+        </h1>
 
-          {/* Left - text */}
-          <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
+        {/* Identity, pinned to the bottom edge over the skyline */}
+        <div className="mt-auto pb-11 sm:pb-14">
+          <motion.div
+            initial={still ? { opacity: 0 } : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
+          >
+            <p className="font-display text-[clamp(1.35rem,3vw,2.1rem)] font-medium leading-tight tracking-tight text-white">
+              Dhiraj{" "}
+              <span className="font-normal text-white/55">(Raj)</span> Jha
+            </p>
 
-            {/* Name */}
-            <h1 className="mb-6">
-              <LineReveal
-                delay={0.2}
-                className="font-display font-medium leading-[0.95] tracking-[-0.02em] text-[clamp(54px,11vw,108px)] text-slate-900"
-              >
-                Dhiraj
-                <span className="align-baseline ml-3 text-[0.3em] font-normal tracking-normal text-slate-400">
-                  (Raj)
-                </span>
-              </LineReveal>
-              <LineReveal
-                delay={0.36}
-                className="font-display font-medium leading-[0.95] tracking-[-0.02em] text-[clamp(54px,11vw,108px)] text-slate-400"
-              >
-                Jha
-              </LineReveal>
-            </h1>
+            <p className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-body text-sm font-light text-white/75 sm:text-[15px]">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#4ba6e0]" />
+              Systems Engineer
+              <span className="text-white/30">/</span>
+              Nashville, TN
+              <span className="text-white/30">/</span>
+              open to work
+            </p>
 
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex items-center justify-center lg:justify-start gap-2 font-body font-light text-base sm:text-lg text-[#586e75] mb-8"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#268bd2] flex-shrink-0" />
-              Systems Engineer &nbsp;·&nbsp; Nashville, TN &nbsp;·&nbsp; open to work
-            </motion.p>
-
-            {/* Bio */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.45 }}
-              className="font-body font-light text-base sm:text-lg text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10"
-            >
-              {personal.bio}
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex flex-wrap gap-2.5 justify-center lg:justify-start"
-            >
-              {/* Primary: View Projects */}
+            <div className="mt-7 flex flex-wrap gap-2.5">
               <a
                 href="#projects"
-                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full
- bg-[#268bd2]/90 text-white
- shadow-[0_2px_16px_rgba(38,139,210,0.35),inset_0_1px_0_rgba(255,255,255,0.25)]
- hover:bg-[#268bd2] hover:shadow-[0_4px_24px_rgba(38,139,210,0.5),inset_0_1px_0_rgba(255,255,255,0.3)]
- transition-all duration-200"
+                className={`${pill} bg-white text-slate-900 hover:bg-white/90`}
               >
                 View Projects <ArrowDown size={15} />
               </a>
-
-              {/* Glass pill: Resume */}
               <a
                 href="/assets/resume/resume_jhadhiraj147.pdf"
                 download
-                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full
- bg-white/30 backdrop-blur-md
- border border-white/60 
- shadow-[0_2px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] 
- text-slate-700 
- hover:bg-white/50 
- transition-all duration-200"
+                className={`${pill} border border-white/35 bg-white/10 text-white hover:bg-white/20`}
               >
                 <Download size={15} /> Resume
               </a>
-
-              {/* Glass pill: GitHub */}
               <a
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full
- bg-white/30 backdrop-blur-md
- border border-white/60 
- shadow-[0_2px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] 
- text-slate-700 
- hover:bg-white/50 
- transition-all duration-200"
+                className={`${pill} border border-white/35 bg-white/10 text-white hover:bg-white/20`}
               >
                 <Github size={15} /> GitHub
               </a>
-
-              {/* Glass pill: LinkedIn */}
               <a
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full
- bg-white/30 backdrop-blur-md
- border border-white/60 
- shadow-[0_2px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] 
- text-slate-700 
- hover:bg-white/50 
- transition-all duration-200"
+                className={`${pill} border border-white/35 bg-white/10 text-white hover:bg-white/20`}
               >
                 <Linkedin size={15} /> LinkedIn
               </a>
-
-            </motion.div>
-          </div>
-
-          {/* Right - profile photo */}
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.96 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1.0, delay: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="relative flex-shrink-0 order-1 lg:order-2 flex items-end justify-center"
-          >
-            {/* Radial mask fades image edges into white bg - no blend mode,
-                works reliably on mobile Safari where mix-blend-mode breaks
-                inside transformed ancestors. */}
-            <div
-              className="relative w-80 h-[440px] sm:w-96 sm:h-[520px] lg:w-[500px] lg:h-[680px] bg-white"
-              style={{
-                WebkitMaskImage: "radial-gradient(ellipse 78% 92% at 50% 52%, black 48%, transparent 100%)",
-                maskImage: "radial-gradient(ellipse 78% 92% at 50% 52%, black 48%, transparent 100%)",
-              }}
-            >
-              {!imgError ? (
-                <Image
-                  src="/assets/pp.PNG"
-                  alt="Dhiraj Jha"
-                  fill
-                  priority
-                  className="object-contain object-bottom"
-                  onError={() => setImgError(true)}
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center">
-                  <span className="text-8xl font-display font-bold text-slate-900 select-none">DJ</span>
-                </div>
-              )}
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.6 }}
-          className="flex flex-col items-center gap-2 mt-14"
-        >
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-400">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 7, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ArrowDown size={18} className="text-brand-400" />
-          </motion.div>
-        </motion.div>
       </div>
+
+      {/* Scroll cue, kept clear of the identity block */}
+      <motion.div
+        aria-hidden
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="pointer-events-none absolute bottom-11 right-4 z-10 hidden flex-col items-center gap-2 sm:right-6 sm:flex lg:right-8"
+      >
+        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-white/60">
+          Scroll
+        </span>
+        <motion.span
+          animate={still ? undefined : { y: [0, 7, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowDown size={16} className="text-white/70" />
+        </motion.span>
+      </motion.div>
     </section>
   );
 }

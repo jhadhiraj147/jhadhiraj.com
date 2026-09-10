@@ -7,19 +7,18 @@ export default function Offtofly() {
   return (
     <section
       id="offtofly"
-      className="relative section-pad bg-gradient-to-b from-white via-[#fbfcfe] to-white overflow-hidden"
+      className="relative section-pad overflow-hidden"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-6xl">
         {/* Brand header */}
         <AnimatedSection>
-          <div className="text-center">
-            <p className="eyebrow mb-6 text-[#268bd2]">Founded 2025</p>
+          <div className="mx-auto max-w-3xl text-center">
             <h2
               className="text-5xl font-bold leading-none text-slate-900 sm:text-6xl"
               style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: "0.01em" }}
             >
               offtofly
-              <span className="ml-1 text-[#268bd2]" style={{ letterSpacing: "-0.08em" }}>
+              <span className="ml-1 text-accent" style={{ letterSpacing: "-0.08em" }}>
                 &rsaquo;&rsaquo;
               </span>
             </h2>
@@ -30,7 +29,7 @@ export default function Offtofly() {
               href="https://offtofly.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-[#268bd2] transition-colors hover:text-[#2aa198]"
+              className="group mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-accent transition-colors hover:text-accent-cyan"
             >
               offtofly.com
               <ArrowUpRight
@@ -42,7 +41,7 @@ export default function Offtofly() {
         </AnimatedSection>
 
         {/* Narrative */}
-        <div className="mt-16 space-y-6">
+        <div className="mx-auto mt-16 max-w-3xl space-y-6">
           <AnimatedSection delay={0.05}>
             <p className="font-body text-lg font-light leading-relaxed text-slate-600">
               We live on a planet of extraordinary things. Mountains, coasts, old cities, faces
@@ -57,7 +56,7 @@ export default function Offtofly() {
               <p className="font-display text-xl italic leading-snug text-slate-900 sm:text-2xl">
                 Give me a perfect maintainable itinerary and I will travel the world.
               </p>
-              <p className="mt-2 font-body text-sm text-slate-400">
+              <p className="mt-2 font-body text-sm text-ink-400">
                 Said nobody. Because nobody built it. Until now.
               </p>
             </blockquote>
@@ -98,7 +97,7 @@ export default function Offtofly() {
                 I believe travel should not be a luxury. This planet is everyone&apos;s home, and
                 we deserve to know it better before we ultimately depart from here.
               </p>
-              <p className="mt-3 font-display text-xl italic text-[#268bd2]">
+              <p className="mt-3 font-display text-xl italic text-accent">
                 Plan it right. Keep it alive.
               </p>
             </div>

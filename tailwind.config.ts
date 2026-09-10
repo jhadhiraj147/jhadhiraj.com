@@ -10,6 +10,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Page wash sampled from the hero photograph's sky, and the ink ramp
+        // re-solved so every muted tone keeps the contrast it had on white.
+        page: {
+          DEFAULT: "#e6e6e6",
+          soft:    "#e0e0e0",
+          surface: "#f0f0f0",
+        },
+        ink: {
+          300: "#b6bfca",
+          400: "#8391a3",
+          500: "#505b6f",
+        },
+        accent: {
+          DEFAULT: "#1b5f90",
+          cyan:    "#1b6561",
+        },
         brand: {
           50:   "#eff7ff",
           100:  "#dbeafe",

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
+import { useSound } from "@/components/ui/SoundProvider";
 
 const links = [
   { href: "#about",      label: "About"      },
@@ -18,6 +19,7 @@ export default function Navbar() {
   const [scrolled,    setScrolled]    = useState(false);
   const [mobileOpen,  setMobileOpen]  = useState(false);
   const [activeLink,  setActiveLink]  = useState("");
+  const { enabled: soundOn, toggle: toggleSound } = useSound();
   const { scrollYProgress } = useScroll();
   const progressScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
@@ -53,11 +55,11 @@ export default function Navbar() {
         transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white/80  backdrop-blur-2xl border-b border-brand-200/40  shadow-sm shadow-brand-400/5"
+            ? "bg-page-surface/85  backdrop-blur-2xl border-b border-brand-200/40  shadow-sm shadow-brand-400/5"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
 
           {/* Logo */}
           <motion.a
@@ -86,7 +88,9 @@ export default function Navbar() {
                   className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                     activeLink === l.href
                       ? "text-brand-400"
-                      : "text-slate-600  hover:text-brand-400  hover:bg-brand-50 "
+                      : scrolled
+                        ? "text-slate-600 hover:text-brand-400 hover:bg-brand-50"
+                        : "text-slate-800 hover:text-brand-500 drop-shadow-[0_1px_1px_rgba(255,255,255,0.45)]"
                   }`}
                 >
                   {l.label}
@@ -103,6 +107,18 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={toggleSound}
+              aria-label={soundOn ? "Mute interface sound" : "Unmute interface sound"}
+              aria-pressed={soundOn}
+              title={soundOn ? "Sound on" : "Sound off"}
+              className={`rounded-xl p-2 transition-colors duration-200 hover:bg-brand-50 ${
+                scrolled ? "text-ink-500" : "text-slate-800"
+              }`}
+            >
+              {soundOn ? <Volume2 size={17} /> : <VolumeX size={17} />}
+            </button>
+
             <a
               href="/assets/resume/resume_jhadhiraj147.pdf"
               download
@@ -118,7 +134,9 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen((o) => !o)}
               aria-label="Toggle menu"
-              className="md:hidden p-2 rounded-xl text-slate-500 hover:bg-brand-50 transition-all"
+              className={`md:hidden p-2 rounded-xl transition-all hover:bg-brand-50 ${
+                scrolled ? "text-ink-500" : "text-slate-800"
+              }`}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -140,7 +158,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-16 inset-x-0 z-40 md:hidden bg-white/95 backdrop-blur-2xl border-b border-brand-200/30 shadow-xl"
+            className="fixed top-16 inset-x-0 z-40 md:hidden bg-page-surface/95 backdrop-blur-2xl border-b border-brand-200/30 shadow-xl"
           >
             <nav className="px-4 py-5 flex flex-col gap-1">
               {links.map((l) => (

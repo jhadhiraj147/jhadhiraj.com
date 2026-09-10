@@ -30,7 +30,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Dhiraj Jha | Systems Engineer",
   description:
-    "Systems engineer with experience in Linux internals, distributed systems and scalable backend design. CS and Math student at Fisk University, class of 2028. Intern at Google and Vanderbilt University. Founder of offtofly, the deterministic travel operating system.",
+    "Systems engineer working on Linux internals, distributed systems and backend infrastructure. CS and Math student at Fisk University, class of 2028. Software developer at Vanderbilt University, previously an SRE intern at Google. Building FlashFS and offtofly.",
   keywords: [
     "Dhiraj Jha",
     "Systems Engineer",
@@ -50,26 +50,35 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dhiraj Jha | Systems Engineer",
     description:
-      "Systems engineer with experience in Linux internals, distributed systems and AI automation. CS and Math student at Fisk University, class of 2028. Intern at Google and Vanderbilt University. Founder of offtofly.",
+      "Systems engineer working on Linux internals, distributed systems and backend infrastructure. Software developer at Vanderbilt University, previously an SRE intern at Google. Building FlashFS and offtofly.",
     url: "https://jhadhiraj.com",
     siteName: "Dhiraj Jha Portfolio",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/assets/hero/og-card.jpg",
+        width: 1200,
+        height: 629,
+        alt: "Dhiraj Jha looking out at the San Francisco skyline",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dhiraj Jha | Systems Engineer",
     description:
-      "Systems engineer with Linux internals, distributed systems and AI automation experience. Intern at Google and Vanderbilt. Founder of offtofly.",
+      "Systems engineer working on Linux internals, distributed systems and backend infrastructure. Software developer at Vanderbilt, previously an SRE intern at Google.",
     creator: "@jhadhiraj147",
+    images: ["/assets/hero/og-card.jpg"],
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eaf6ff" },
-    { media: "(prefers-color-scheme: dark)",  color: "#0f172a" },
+    { media: "(prefers-color-scheme: light)", color: "#d5d8dc" },
+    { media: "(prefers-color-scheme: dark)",  color: "#0d1117" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -83,7 +92,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${playfairDisplay.variable} ${inter.variable} scroll-smooth`}
     >
-      <body className="font-sans antialiased bg-white">
+      <body className="font-sans antialiased bg-page">
         {children}
       </body>
     </html>

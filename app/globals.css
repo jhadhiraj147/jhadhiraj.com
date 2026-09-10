@@ -5,10 +5,10 @@
 /* ─── Solarized color system ─── */
 :root {
   /* Light - pure white */
-  --background:  #ffffff;
+  --background:  #e6e6e6;
   --foreground:  #4b5563;
-  --card:        rgba(244, 244, 245, 0.85);
-  --card-border: rgba(0, 0, 0, 0.08);
+  --card:        rgba(240, 240, 240, 0.88);
+  --card-border: rgba(15, 23, 42, 0.10);
 }
 
 .dark {
@@ -72,7 +72,7 @@ body::after {
 
   /* Solarized blue → cyan gradient on text */
   .gradient-text {
-    background: linear-gradient(to right, #268bd2, #2aa198);
+    background: linear-gradient(to right, #1b5f90, #1b6561);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -82,23 +82,6 @@ body::after {
 
   .section-pad { @apply py-24 px-4 sm:px-6 lg:px-8; }
 
-  /*
-    Photo blend: uses mask-image so edges are genuinely transparent (not color-painted).
-    Transparent pixels reveal the actual background, so this works with any background
-    color or gradient - no mismatch possible.
-    Two intersecting linear gradients create a smooth fade on all four edges, with
-    corners fading most because both masks are partially transparent there.
-  */
-  .photo-blend {
-    -webkit-mask-image:
-      linear-gradient(to bottom, transparent 0%, black 9%,  black 54%, transparent 100%),
-      linear-gradient(to right,  transparent 0%, black 8%,  black 92%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(to bottom, transparent 0%, black 9%,  black 54%, transparent 100%),
-      linear-gradient(to right,  transparent 0%, black 8%,  black 92%, transparent 100%);
-    mask-composite: intersect;
-  }
 
   /* Eyebrow label style - wide-tracked, geometric */
   .eyebrow {
@@ -109,51 +92,15 @@ body::after {
     text-transform: uppercase;
   }
 
-  /* ── Animated card backgrounds (simulate ambient video) ── */
-  .anim-matcha {
-    background: linear-gradient(135deg, #0d2e0a 0%, #1a5c1a 35%, #0f3d20 65%, #0a2e0a 100%);
-    background-size: 400% 400%;
-    animation: matchaSwirl 9s ease-in-out infinite;
-  }
-  .anim-city {
-    background: radial-gradient(ellipse at 30% 70%, #2a1800 0%, #001020 45%, #001a35 100%);
-    background-size: 300% 300%;
-    animation: cityGlow 7s ease-in-out infinite;
-  }
-  .anim-globe {
-    background: linear-gradient(160deg, #001835 0%, #003055 40%, #001a40 70%, #000e28 100%);
-    background-size: 400% 400%;
-    animation: globeFloat 11s ease-in-out infinite;
-  }
-  .anim-code {
-    background: radial-gradient(circle at 50% 60%, #18103a 0%, #0a0518 60%, #060310 100%);
-    background-size: 300% 300%;
-    animation: codeGlow 5s ease-in-out infinite;
-  }
-
-  @keyframes matchaSwirl {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes cityGlow {
-    0%   { background-position: 0% 0%; filter: brightness(0.9); }
-    50%  { background-position: 100% 100%; filter: brightness(1.15); }
-    100% { background-position: 0% 0%; filter: brightness(0.9); }
-  }
-  @keyframes globeFloat {
-    0%   { background-position: 0% 30%; }
-    50%  { background-position: 100% 70%; }
-    100% { background-position: 0% 30%; }
-  }
-  @keyframes codeGlow {
-    0%   { filter: brightness(0.85) saturate(1.2); }
-    50%  { filter: brightness(1.2)  saturate(1.8); }
-    100% { filter: brightness(0.85) saturate(1.2); }
-  }
 
   /* ── Seamless marquee ticker ── */
-  .ticker-wrap { overflow: hidden; }
+  /* Fade the pills themselves rather than painting a coloured overlay, so the
+     edges work over the photo backdrop instead of showing as pale bands. */
+  .ticker-wrap {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  }
   .ticker-track-left {
     display: flex;
     width: max-content;
@@ -177,12 +124,4 @@ body::after {
     to   { transform: translateX(0); }
   }
 
-  /* Dot grid using Solarized blue at low opacity */
-  .dot-grid {
-    background-image: radial-gradient(circle, #268bd222 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  .dark .dot-grid {
-    background-image: radial-gradient(circle, #268bd230 1px, transparent 1px);
-  }
 }

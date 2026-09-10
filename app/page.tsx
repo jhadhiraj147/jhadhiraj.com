@@ -1,3 +1,5 @@
+import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
+import SoundProvider from "@/components/ui/SoundProvider";
 import Navbar        from "@/components/layout/Navbar";
 import Hero          from "@/components/sections/Hero";
 import About         from "@/components/sections/About";
@@ -13,9 +15,10 @@ import Footer        from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <>
+    <SoundProvider>
+      <PhotoBackdrop />
       <Navbar />
-      <main className="overflow-x-hidden">
+      <main className="relative z-10 overflow-x-hidden">
         <Hero />
         <About />
         <Skills />
@@ -27,7 +30,9 @@ export default function Home() {
         <Offtofly />
         <Contact />
       </main>
-      <Footer />
-    </>
+      <div className="relative z-10">
+        <Footer />
+      </div>
+    </SoundProvider>
   );
 }

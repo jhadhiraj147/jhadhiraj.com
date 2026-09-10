@@ -19,9 +19,6 @@ function TickerRow({ skills, reverse }: { skills: string[]; reverse?: boolean })
  const doubled = [...skills, ...skills];
  return (
  <div className="ticker-wrap relative">
- {/* Edge fades */}
- <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#f7f8fa] to-transparent z-10 pointer-events-none" />
- <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#f7f8fa] to-transparent z-10 pointer-events-none" />
  <div className={reverse ? "ticker-track-right" : "ticker-track-left"}>
  {doubled.map((skill, i) => (
  <SkillPill key={i} skill={skill} />
@@ -35,15 +32,11 @@ export default function Skills() {
  return (
  <section
  id="skills"
- className="relative section-pad bg-gradient-to-b from-white via-[#f7f8fa] to-white overflow-hidden"
+ className="relative section-pad overflow-hidden"
  >
- <div className="max-w-7xl mx-auto">
+ <div className="max-w-6xl mx-auto">
  <AnimatedSection>
- <SectionHeading
- eyebrow="Technical Skills"
- title="Tech Stack"
- subtitle="What I reach for when building production systems."
- />
+ <SectionHeading title="Tech Stack" />
  </AnimatedSection>
 
  <AnimatedSection delay={0.1}>

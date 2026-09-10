@@ -7,7 +7,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const GEO_URL = "/world-110m.json";
 
-const VISITED = new Set(["524", "356", "840", "792", "48", "608", "784"]);
+const VISITED = new Set(["524", "356", "840", "792", "48", "608", "784", "630"]);
 
 const markers: { name: string; coords: [number, number] }[] = [
   { name: "Nepal",       coords: [85.32,  27.72] },
@@ -17,6 +17,7 @@ const markers: { name: string; coords: [number, number] }[] = [
   { name: "Bahrain",     coords: [50.59,  26.22] },
   { name: "Philippines", coords: [122.0,  12.88] },
   { name: "UAE",         coords: [53.85,  23.42] },
+  { name: "Puerto Rico", coords: [-66.59, 18.22] },
 ];
 
 const story = [
@@ -42,18 +43,17 @@ export default function PersonalFacts() {
   const inView  = useInView(mapRef, { once: true, amount: 0.3 });
 
   return (
-    <section className="relative section-pad bg-gradient-to-b from-white via-[#f7f8fa] to-white overflow-hidden">
+    <section className="relative section-pad overflow-hidden">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
         <AnimatedSection>
           <div className="text-center mb-12">
-            <p className="eyebrow text-[#268bd2] mb-5">Beyond the Code</p>
             <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl leading-none tracking-tight text-slate-900">
               7 Countries.
             </h2>
-            <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl leading-none tracking-tight text-slate-300">
+            <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl leading-none tracking-tight text-ink-300">
               One Nepali Passport.
             </h2>
           </div>
@@ -80,11 +80,11 @@ export default function PersonalFacts() {
                         key={geo.rsmKey}
                         geography={geo}
                         fill={visited ? "rgba(38,139,210,0.14)" : "#f1f5f9"}
-                        stroke={visited ? "#268bd2" : "#cbd5e1"}
+                        stroke={visited ? "#268bd2" : "#b6bfca"}
                         strokeWidth={visited ? 0.7 : 0.35}
                         style={{
                           default: { outline: "none" },
-                          hover:   { fill: visited ? "rgba(38,139,210,0.28)" : "#e2e8f0", outline: "none" },
+                          hover:   { fill: visited ? "rgba(38,139,210,0.28)" : "#dfe3e8", outline: "none" },
                           pressed: { outline: "none" },
                         }}
                       />
@@ -132,8 +132,8 @@ export default function PersonalFacts() {
               { value: "3",   label: "Continents" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="font-display font-bold text-4xl sm:text-5xl text-[#268bd2] leading-none tabular-nums">{s.value}</p>
-                <p className="eyebrow text-slate-400 mt-2">{s.label}</p>
+                <p className="font-display font-bold text-4xl sm:text-5xl text-accent leading-none tabular-nums">{s.value}</p>
+                <p className="eyebrow text-ink-400 mt-2">{s.label}</p>
               </div>
             ))}
           </div>
@@ -144,11 +144,11 @@ export default function PersonalFacts() {
           {story.map((s, i) => (
             <AnimatedSection key={s.num} delay={0.12 + i * 0.1}>
               <div className="space-y-3 lg:px-8 first:lg:pl-0 last:lg:pr-0 pt-8 lg:pt-0 first:pt-0">
-                <p className="eyebrow text-[#268bd2]">{s.num}</p>
+                <p className="eyebrow text-accent">{s.num}</p>
                 <p className="font-display font-semibold text-lg text-slate-800 tracking-tight leading-snug">
                   {s.title}
                 </p>
-                <p className="font-body font-light text-sm text-slate-500 leading-relaxed">
+                <p className="font-body font-light text-sm text-ink-500 leading-relaxed">
                   {s.body}
                 </p>
               </div>
@@ -159,11 +159,11 @@ export default function PersonalFacts() {
         {/* Bridge to offtofly */}
         <AnimatedSection delay={0.4}>
           <div className="text-center mt-20">
-            <p className="font-display italic text-2xl sm:text-3xl text-[#268bd2]">
+            <p className="font-display italic text-2xl sm:text-3xl text-accent">
               This is where offtofly started.
             </p>
             <motion.div
-              className="mt-6 inline-block text-slate-300"
+              className="mt-6 inline-block text-ink-300"
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
