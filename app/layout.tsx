@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Playfair_Display, Inter } from "next/font/google";
+import { Space_Grotesk, Playfair_Display, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
 // UI chrome - navigation, buttons, labels, pills
@@ -19,12 +19,20 @@ const playfairDisplay = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-// Body copy - descriptions, paragraphs, readable prose
-const inter = Inter({
+// Technical type for the systems work: labels, diagrams, code, numbers
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-plex-mono",
   display: "swap",
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "600"],
+});
+
+// Technical prose beside the diagrams
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  variable: "--font-plex-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -90,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${playfairDisplay.variable} ${inter.variable} scroll-smooth`}
+      className={`${spaceGrotesk.variable} ${playfairDisplay.variable} ${plexMono.variable} ${plexSans.variable} scroll-smooth`}
     >
       <body className="font-sans antialiased bg-page">
         {children}

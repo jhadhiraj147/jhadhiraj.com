@@ -4,6 +4,7 @@ export const personal = {
   location: "Nashville, TN",
   github: "https://github.com/jhadhiraj147",
   linkedin: "https://linkedin.com/in/jhadhiraj147",
+  instagram: "https://instagram.com/jhadhiraj147",
   bio: "I am an engineering student who works on systems software, backend infrastructure and automation. I automated engineering assessments at Google, moved five years of stranded records onto a new platform at Vanderbilt, and I am now building a vision system there that reads confidential documents offline. On my own time I build distributed systems in Go, C++ and Python. What holds my attention is software with real constraints behind it: correctness, reliability, latency, recovery after failure, and code someone else can still maintain a year later.",
 };
 

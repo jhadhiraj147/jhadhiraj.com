@@ -58,6 +58,20 @@ npm run dev      # http://localhost:3000
 | `npm run start` | Serve the production build           |
 | `npm run lint`  | Run ESLint (next/core-web-vitals)    |
 
+## Updating the resume
+
+The resume is authored on Overleaf and served here as a static PDF:
+
+- Source (read only): <https://www.overleaf.com/read/bkthdkdzhftp#d798f5>
+- Served file: `public/assets/resume/resume_jhadhiraj147.pdf`
+
+To refresh it: open the Overleaf project, **Download PDF**, and replace that
+file, keeping the same filename so the Resume button keeps working.
+
+Overleaf read links expose no public PDF endpoint, so this step is manual.
+Automating it would need Overleaf's Git bridge (a premium feature), after which
+a scheduled job could clone the project, compile it, and commit the PDF.
+
 ## License
 
 The **source code** in this repository is released under the

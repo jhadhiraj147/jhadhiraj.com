@@ -58,10 +58,12 @@ const config: Config = {
         display: ["var(--font-playfair)", "Georgia", "serif"],
         // UI chrome - nav, buttons, labels, pills
         sans:    ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
-        // Body prose - paragraphs, descriptions
-        body:    ["var(--font-inter)", "system-ui", "sans-serif"],
-        // Technical / monospace
-        mono:    ["ui-monospace", "JetBrains Mono", "Fira Code", "monospace"],
+        // Body prose - paragraphs, descriptions (Plex Sans, sibling of the mono)
+        body:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
+        // Technical / monospace - labels, diagrams, code, numbers
+        mono:    ["var(--font-plex-mono)", "ui-monospace", "monospace"],
+        // Technical prose beside diagrams
+        tech:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
       },
       animation: {
         float:        "float 6s ease-in-out infinite",

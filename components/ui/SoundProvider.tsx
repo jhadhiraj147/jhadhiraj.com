@@ -174,6 +174,7 @@ export default function SoundProvider({ children }: { children: ReactNode }) {
       const el = (e.target as Element | null)?.closest?.(TARGETS);
       if (!el) return;
       if (el.hasAttribute("disabled") || el.getAttribute("aria-disabled") === "true") return;
+      if (el.hasAttribute("data-silent")) return; // plays its own audio
       wake(knock);
     };
     const onKey = () => wake();

@@ -1,25 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X, Download, Volume2, VolumeX } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Download, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
-import { useSound } from "@/components/ui/SoundProvider";
+import { personal } from "@/lib/data";
 
-const links = [
-  { href: "#about",      label: "About"      },
-  { href: "#skills",     label: "Skills"     },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects",   label: "Projects"   },
-  { href: "#education",  label: "Education"  },
-  { href: "#contact",    label: "Contact"    },
-];
-
+/* Avatar on the left. GitHub, LinkedIn, Resume on the right. Nothing else. */
 export default function Navbar() {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [mobileOpen,  setMobileOpen]  = useState(false);
-  const [activeLink,  setActiveLink]  = useState("");
-  const { enabled: soundOn, toggle: toggleSound } = useSound();
+  const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const progressScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
@@ -29,161 +18,69 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Highlight active section
-  useEffect(() => {
-    const sectionIds = links.map((l) => l.href.replace("#", ""));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActiveLink(`#${e.target.id}`);
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
+  /* Every control sits on a 32px module: 32x32 icon squares, a 32px tall Resume,
+     a 32px avatar. Same ink, same radius, same hover, so the row reads as one family. */
+  const control = `inline-flex h-8 items-center justify-center rounded-lg transition-colors duration-150 ${
+    scrolled
+      ? "text-ink-500 hover:bg-slate-900/5 hover:text-slate-900"
+      : "text-slate-800 hover:bg-slate-900/5 hover:text-slate-900"
+  }`;
+  const iconBtn = `${control} w-8`;
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-page-surface/85  backdrop-blur-2xl border-b border-brand-200/40  shadow-sm shadow-brand-400/5"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-
-          {/* Logo */}
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.06 }}
-            className="flex items-center"
-          >
-            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-1 ring-slate-200 flex-shrink-0">
-              <Image
-                src="/assets/avatar.jpg"
-                alt="Dhiraj Jha"
-                fill
-                sizes="36px"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-                priority
-              />
-            </div>
-          </motion.a>
-
-          {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
-                    activeLink === l.href
-                      ? "text-brand-400"
-                      : scrolled
-                        ? "text-slate-600 hover:text-brand-400 hover:bg-brand-50"
-                        : "text-slate-800 hover:text-brand-500 drop-shadow-[0_1px_1px_rgba(255,255,255,0.45)]"
-                  }`}
-                >
-                  {l.label}
-                  {activeLink === l.href && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand-400"
-                    />
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* Right actions */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleSound}
-              aria-label={soundOn ? "Mute interface sound" : "Unmute interface sound"}
-              aria-pressed={soundOn}
-              title={soundOn ? "Sound on" : "Sound off"}
-              className={`rounded-xl p-2 transition-colors duration-200 hover:bg-brand-50 ${
-                scrolled ? "text-ink-500" : "text-slate-800"
-              }`}
-            >
-              {soundOn ? <Volume2 size={17} /> : <VolumeX size={17} />}
-            </button>
-
-            <a
-              href="/assets/resume/resume_jhadhiraj147.pdf"
-              download
-              className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full
-                bg-white/60 backdrop-blur-md border border-slate-200
-                shadow-[0_2px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.8)]
-                text-slate-700 hover:border-[#268bd2]/40 hover:shadow-[0_2px_16px_rgba(38,139,210,0.15),inset_0_1px_0_rgba(255,255,255,0.8)]
-                transition-all duration-200"
-            >
-              <Download size={15} /> Resume
-            </a>
-
-            <button
-              onClick={() => setMobileOpen((o) => !o)}
-              aria-label="Toggle menu"
-              className={`md:hidden p-2 rounded-xl transition-all hover:bg-brand-50 ${
-                scrolled ? "text-ink-500" : "text-slate-800"
-              }`}
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-page-surface/95 border-b border-slate-400/20"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        <motion.a href="#" whileHover={{ scale: 1.06 }} className="flex items-center" aria-label="Top">
+          <div className="relative h-8 w-8 rounded-full overflow-hidden ring-1 ring-slate-300/70 flex-shrink-0">
+            <Image
+              src="/assets/avatar.jpg"
+              alt="Dhiraj Jha"
+              fill
+              sizes="32px"
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+              priority
+            />
           </div>
-        </div>
+        </motion.a>
 
-        {/* Scroll progress bar */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#268bd2] to-[#2aa198] origin-left"
-          style={{ scaleX: progressScaleX }}
-        />
-      </motion.nav>
-
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            className="fixed top-16 inset-x-0 z-40 md:hidden bg-page-surface/95 backdrop-blur-2xl border-b border-brand-200/30 shadow-xl"
+        <div className="flex items-center gap-1.5">
+          <a href={personal.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub" className={iconBtn}>
+            <Github size={18} strokeWidth={1.8} />
+          </a>
+          <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className={iconBtn}>
+            <Linkedin size={18} strokeWidth={1.8} />
+          </a>
+          <a href={personal.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" className={iconBtn}>
+            <Instagram size={18} strokeWidth={1.8} />
+          </a>
+          <a href={`mailto:${personal.email}`} aria-label="Email" title={personal.email} className={iconBtn}>
+            <Mail size={18} strokeWidth={1.8} />
+          </a>
+          <a
+            href="/assets/resume/resume_jhadhiraj147.pdf"
+            download
+            className={`${control} gap-1.5 border px-3 text-[13px] font-medium ${
+              scrolled ? "border-slate-400/40" : "border-slate-900/30"
+            }`}
           >
-            <nav className="px-4 py-5 flex flex-col gap-1">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="px-4 py-3 text-sm font-medium text-slate-700 hover:text-brand-400 rounded-xl hover:bg-brand-50 transition-all"
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="/assets/resume/resume_jhadhiraj147.pdf"
-                download
-                className="mt-3 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-full
-                  bg-[#268bd2]/90 text-white
-                  shadow-[0_2px_16px_rgba(38,139,210,0.35),inset_0_1px_0_rgba(255,255,255,0.25)]"
-              >
-                <Download size={15} /> Download Resume
-              </a>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+            <Download size={14} strokeWidth={2} /> Resume
+          </a>
+        </div>
+      </div>
+
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#268bd2] to-[#2aa198] origin-left"
+        style={{ scaleX: progressScaleX }}
+      />
+    </motion.nav>
   );
 }

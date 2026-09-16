@@ -1,8 +1,8 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
-import { personal } from "@/lib/data";
+import { ArrowDown, Volume2 } from "lucide-react";
 
 /* Clips a whole line up as one unit. Descenders are never cut, kerning survives. */
 function LineReveal({
@@ -32,32 +32,69 @@ function LineReveal({
   );
 }
 
-const pill =
-  "inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-sans text-sm font-semibold " +
-  "backdrop-blur-md transition-colors duration-200";
+/* The name, set beneath the motto as its attribution, with how to say it. */
+function NameMark() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [available, setAvailable] = useState(true);
 
+  const say = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.currentTime = 0;
+    void a.play().then(() => setPlaying(true)).catch(() => setAvailable(false));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.85, ease: [0.21, 0.47, 0.32, 0.98] }}
+      className="mt-7 sm:mt-9"
+    >
+      <p className="font-mono text-[clamp(1.35rem,2.4vw,2rem)] font-medium tracking-tight text-[#0d1117]">
+        Dhiraj Jha
+      </p>
+      <div className="mt-2 flex items-center gap-2 font-mono text-[13px] text-[#0d1117]/65">
+        {available && (
+          <button
+            type="button"
+            onClick={say}
+            data-silent
+            aria-label="Hear how to pronounce Dhiraj"
+            title="Hear it"
+            className={`-ml-1 rounded-md p-1 transition-colors duration-200 hover:bg-slate-900/5 hover:text-[#0d1117] ${
+              playing ? "text-[#0d1117]" : ""
+            }`}
+          >
+            <Volume2 size={15} strokeWidth={2} />
+          </button>
+        )}
+        <span>dhee &middot; ruhj</span>
+      </div>
+      <audio
+        ref={audioRef}
+        preload="none"
+        src="/assets/audio/dhiraj.mp3"
+        onEnded={() => setPlaying(false)}
+        onPause={() => setPlaying(false)}
+        onError={() => setAvailable(false)}
+      />
+    </motion.div>
+  );
+}
+
+/* The photograph, the motto, the name. */
 export default function Hero() {
   const still = useReducedMotion();
 
   return (
     <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden">
-      {/* Scrim. Only the lower half is darkened, so the sky the motto sits on stays untouched. */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(8,11,16,0.72) 0%, rgba(8,11,16,0.45) 18%, rgba(8,11,16,0.10) 38%, rgba(8,11,16,0) 55%)",
-        }}
-      />
-
-      {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col px-4 sm:px-6 lg:px-8">
-        {/* The motto, printed on the empty sky in the upper left */}
         <h1 className="pt-[26vh] sm:pt-[24vh] lg:pt-[21vh]">
           <LineReveal
             delay={0.15}
-            className="max-w-[15ch] font-display leading-[0.98] tracking-[-0.02em] text-[#0d1117] text-[clamp(2.6rem,10vw,4rem)] sm:max-w-none sm:text-[clamp(3rem,6.6vw,6.5rem)]"
+            className="max-w-[15ch] font-display leading-[0.98] tracking-[-0.02em] text-[#0d1117] text-[clamp(2.6rem,10vw,4rem)] sm:max-w-none sm:text-[clamp(2.75rem,5.8vw,5.5rem)]"
           >
             <span className="font-bold">Your Ideas</span>
             <span className="font-normal"> will live</span>
@@ -66,80 +103,25 @@ export default function Hero() {
           </LineReveal>
         </h1>
 
-        {/* Identity, pinned to the bottom edge over the skyline */}
-        <div className="mt-auto pb-11 sm:pb-14">
-          <motion.div
-            initial={still ? { opacity: 0 } : { opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
-          >
-            <p className="font-display text-[clamp(1.35rem,3vw,2.1rem)] font-medium leading-tight tracking-tight text-white">
-              Dhiraj{" "}
-              <span className="font-normal text-white/55">(Raj)</span> Jha
-            </p>
-
-            <p className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-body text-sm font-light text-white/75 sm:text-[15px]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#4ba6e0]" />
-              Systems Engineer
-              <span className="text-white/30">/</span>
-              Nashville, TN
-              <span className="text-white/30">/</span>
-              open to work
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-2.5">
-              <a
-                href="#projects"
-                className={`${pill} bg-white text-slate-900 hover:bg-white/90`}
-              >
-                View Projects <ArrowDown size={15} />
-              </a>
-              <a
-                href="/assets/resume/resume_jhadhiraj147.pdf"
-                download
-                className={`${pill} border border-white/35 bg-white/10 text-white hover:bg-white/20`}
-              >
-                <Download size={15} /> Resume
-              </a>
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${pill} border border-white/35 bg-white/10 text-white hover:bg-white/20`}
-              >
-                <Github size={15} /> GitHub
-              </a>
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${pill} border border-white/35 bg-white/10 text-white hover:bg-white/20`}
-              >
-                <Linkedin size={15} /> LinkedIn
-              </a>
-            </div>
-          </motion.div>
-        </div>
+        <NameMark />
       </div>
 
-      {/* Scroll cue, kept clear of the identity block */}
-      <motion.div
-        aria-hidden
+      <motion.a
+        href="#about"
+        aria-label="Scroll"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="pointer-events-none absolute bottom-11 right-4 z-10 hidden flex-col items-center gap-2 sm:right-6 sm:flex lg:right-8"
+        className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
       >
-        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-white/60">
-          Scroll
-        </span>
+        <span className="font-mono text-[10px] tracking-[0.2em] uppercase">scroll</span>
         <motion.span
-          animate={still ? undefined : { y: [0, 7, 0] }}
+          animate={still ? undefined : { y: [0, 6, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown size={16} className="text-white/70" />
+          <ArrowDown size={16} />
         </motion.span>
-      </motion.div>
+      </motion.a>
     </section>
   );
 }

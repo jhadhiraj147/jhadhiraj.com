@@ -28,10 +28,11 @@ export default function About() {
           {/* Left - narrative */}
           <div className="lg:col-span-7 space-y-6">
             <AnimatedSection delay={0.1}>
-              <p className="font-body font-light text-base sm:text-lg text-slate-600 leading-relaxed">
-                Deep down I am just a{" "}
-                <span className="font-semibold text-slate-800">math guy</span>, and the why and
-                how is most of what drives me. That is why I avoid frameworks and go looking for
+              <p className="font-body text-lg text-slate-900 sm:text-xl">Namaste,</p>
+              <p className="mt-4 font-body font-light text-base sm:text-lg text-slate-600 leading-relaxed">
+                I am Dhiraj, a system software engineer based in Nashville. But... deep down, I am
+                just a <span className="font-semibold text-slate-800">math guy</span>. The why and
+                how is most of what drives me, which is why I avoid frameworks and go looking for
                 what sits underneath them.
               </p>
             </AnimatedSection>
@@ -63,19 +64,6 @@ export default function About() {
                     </li>
                   ))}
                 </ul>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.25} direction="right">
-              <div className="space-y-5 pl-4 border-l border-[#268bd2]/20">
-                <div>
-                  <p className="eyebrow text-accent mb-1.5">Currently</p>
-                  <p className="font-body font-light text-sm text-slate-600">
-                    Building{" "}
-                    <span className="font-semibold text-slate-800">offtofly</span>
-                    , a constraint solver for travel planning
-                  </p>
-                </div>
               </div>
             </AnimatedSection>
           </div>

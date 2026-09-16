@@ -9,7 +9,7 @@ const row2 = skillCategories.slice(2, 4).flatMap((c) => c.skills);
 
 function SkillPill({ skill }: { skill: string }) {
  return (
- <span className="inline-flex items-center flex-shrink-0 px-5 py-2.5 mx-2 text-sm font-medium rounded-full glass border border-[#268bd2]/15 text-slate-700 whitespace-nowrap select-none">
+ <span className="inline-flex items-center flex-shrink-0 px-5 py-2.5 mx-2 text-sm font-medium rounded-full border border-slate-400/30 bg-page-surface text-slate-700 whitespace-nowrap select-none">
  {skill}
  </span>
  );
