@@ -14,7 +14,7 @@ const logoMap: Record<LogoKey, React.ReactNode> = {
   offtofly: (
     <span
       aria-label="offtofly"
-      className="text-[26px] font-bold leading-none text-accent"
+      className="text-title font-bold text-accent"
       style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: "-0.08em" }}
     >
       &rsaquo;&rsaquo;
@@ -25,7 +25,7 @@ const logoMap: Record<LogoKey, React.ReactNode> = {
 function OfftoflyWordmark() {
   return (
     <h3
-      className="text-xl font-bold text-slate-900 sm:text-2xl"
+      className="text-title font-bold text-slate-900"
       style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: "0.01em" }}
     >
       offtofly
@@ -58,11 +58,11 @@ export default function Experience() {
                     {co.id === "offtofly" ? (
                       <OfftoflyWordmark />
                     ) : (
-                      <h3 className="font-tech text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+                      <h3 className="font-tech text-title font-semibold tracking-tight text-slate-900">
                         {co.company}
                       </h3>
                     )}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-ink-500 sm:justify-end">
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-caption text-ink-500 sm:justify-end">
                       {co.period && <span className="whitespace-nowrap">{co.period}</span>}
                       <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                         <MapPin size={14} strokeWidth={2} /> {co.location}
@@ -76,14 +76,14 @@ export default function Experience() {
                       {co.roles.map((r) => (
                         <div key={r.title}>
                           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                            <p className="font-tech text-base font-medium text-accent sm:text-lg">{r.title}</p>
-                            <p className="whitespace-nowrap font-mono text-xs text-ink-500">{r.period}</p>
+                            <p className="font-tech text-lead font-medium text-accent">{r.title}</p>
+                            <p className="whitespace-nowrap font-mono text-caption text-ink-500">{r.period}</p>
                           </div>
-                          <p className="mt-3 max-w-2xl font-body text-base/7 font-light text-slate-600">
+                          <p className="mt-3 max-w-2xl font-body text-body font-light text-slate-600">
                             {r.description}
                           </p>
                           {"note" in r && r.note && (
-                            <p className="mt-3 max-w-2xl font-body text-base/7 font-medium text-gold">{r.note}</p>
+                            <p className="mt-3 max-w-2xl font-body text-body font-medium text-gold">{r.note}</p>
                           )}
                         </div>
                       ))}

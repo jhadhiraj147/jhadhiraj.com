@@ -49,7 +49,7 @@ export default function PersonalFacts() {
         {/* Heading */}
         <AnimatedSection>
           <div className="text-center mb-16">
-            <h2 className="font-tech font-semibold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900">
+            <h2 className="font-tech font-semibold text-display-sm sm:text-display-md lg:text-display-lg tracking-tight text-slate-900">
               <span className="block">7 Countries.</span>
               <span className="block text-ink-300">One Nepali Passport.</span>
             </h2>
@@ -130,8 +130,8 @@ export default function PersonalFacts() {
               { value: "3",   label: "Continents" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="font-sans font-bold text-4xl sm:text-5xl tracking-tight text-accent leading-none tabular-nums">{s.value}</p>
-                <p className="mt-2 font-sans text-xs font-medium uppercase tracking-widest text-ink-400">{s.label}</p>
+                <p className="font-sans font-bold text-display-sm sm:text-display-md tracking-tight text-accent tabular-nums">{s.value}</p>
+                <p className="mt-2 font-sans text-caption font-medium uppercase tracking-widest text-ink-400">{s.label}</p>
               </div>
             ))}
           </div>
@@ -142,10 +142,10 @@ export default function PersonalFacts() {
           {story.map((s, i) => (
             <AnimatedSection key={s.title} delay={0.12 + i * 0.1}>
               <div className="space-y-2">
-                <p className="font-sans font-semibold text-xl text-slate-800 tracking-tight">
+                <p className="font-sans font-semibold text-title text-slate-800 tracking-tight">
                   {s.title}
                 </p>
-                <p className="max-w-md font-body font-light text-sm/6 text-ink-500">
+                <p className="max-w-md font-body font-light text-body text-ink-500">
                   {s.body}
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function PersonalFacts() {
         {/* Bridge to offtofly */}
         <AnimatedSection delay={0.4}>
           <div className="text-center mt-16">
-            <p className="font-body italic text-xl/8 sm:text-2xl/9 text-accent">
+            <p className="font-body italic text-lead text-accent">
               This is where offtofly started.
             </p>
             <motion.a

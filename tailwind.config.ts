@@ -58,11 +58,24 @@ const config: Config = {
           green:   "#859900",
         },
       },
+      /* TYPE SCALE. One rule: every size is 16 x 1.25^n (the major third),
+         rounded to a whole pixel, and every line height sits on the 4px grid.
+         Each role uses exactly one step. The hero motto is the only exception. */
+      fontSize: {
+        caption:      ["13px", { lineHeight: "20px" }], // n=-1  dates, places, chips, labels, captions
+        body:         ["16px", { lineHeight: "28px" }], // n=0   every paragraph, inline code, links
+        lead:         ["20px", { lineHeight: "32px" }], // n=1   role and degree lines, lead-ins, taglines
+        title:        ["25px", { lineHeight: "32px" }], // n=2   every h3
+        headline:     ["31px", { lineHeight: "40px" }], // n=3   the name under the motto
+        "display-sm": ["39px", { lineHeight: "44px" }], // n=4   section titles on phones
+        "display-md": ["49px", { lineHeight: "52px" }], // n=5   section titles on tablets, figures
+        "display-lg": ["61px", { lineHeight: "64px" }], // n=6   section titles on desktop
+      },
       fontFamily: {
         // Display serif - headings, large statements, hero name
         display: ["var(--font-playfair)", "Georgia", "serif"],
         // UI chrome - nav, buttons, labels, pills
-        sans:    ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
+        sans:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
         // Body prose - paragraphs, descriptions (Plex Sans, sibling of the mono)
         body:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
         // Technical / monospace - labels, diagrams, code, numbers

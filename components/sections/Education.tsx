@@ -34,12 +34,12 @@ export default function Education() {
                     {/* School and location left, dates right, on one baseline */}
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                       <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h3 className="font-tech text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+                        <h3 className="font-tech text-title font-semibold tracking-tight text-slate-900">
                           {edu.school}
                         </h3>
-                        <span className="font-body text-xs text-ink-400">{edu.location}</span>
+                        <span className="font-body text-caption text-ink-400">{edu.location}</span>
                       </div>
-                      <p className="font-body text-xs text-accent sm:flex-none">
+                      <p className="font-body text-caption text-accent sm:flex-none">
                         {edu.period}
                       </p>
                     </div>
@@ -48,7 +48,7 @@ export default function Education() {
                       {edu.degrees.map((degree, di) => (
                         <p
                           key={degree}
-                          className="flex items-center gap-2 font-sans text-sm/6 font-medium text-slate-700 sm:text-base/6"
+                          className="flex items-center gap-2 font-sans text-lead font-medium text-slate-700"
                         >
                           {di === 0 && edu.secondLogoPath && (
                             <span className="relative h-4 w-4 flex-none overflow-hidden rounded border border-slate-400/25 bg-white bg-clip-padding">
@@ -75,7 +75,7 @@ export default function Education() {
                               aria-hidden
                               className="h-1 w-1 flex-none -translate-y-[0.125em] rounded-full bg-accent"
                             />
-                            <span className="text-sm">
+                            <span className="text-caption">
                               <span className="font-sans font-medium text-slate-800">
                                 {item.label}
                               </span>
@@ -87,8 +87,8 @@ export default function Education() {
                     )}
 
                     {edu.courses.length > 0 && (
-                      <p className="mt-6 max-w-md font-body text-sm/6 text-ink-400">
-                        <span className="font-sans text-xs font-medium uppercase tracking-widest text-ink-400">
+                      <p className="mt-6 max-w-md font-body text-caption text-ink-400">
+                        <span className="font-sans text-caption font-medium uppercase tracking-widest text-ink-400">
                           Coursework
                         </span>
                         <span aria-hidden className="mx-2 text-ink-300">

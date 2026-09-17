@@ -1,14 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Playfair_Display, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Playfair_Display, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
-
-// UI chrome - navigation, buttons, labels, pills
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-});
 
 // Display - hero name, section headings, large statements
 const playfairDisplay = Playfair_Display({
@@ -99,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${playfairDisplay.variable} ${plexMono.variable} ${plexSans.variable} scroll-smooth`}
+      className={`${playfairDisplay.variable} ${plexMono.variable} ${plexSans.variable} scroll-smooth`}
     >
       <body className="font-sans antialiased bg-page">
         {children}

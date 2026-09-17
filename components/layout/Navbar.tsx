@@ -68,7 +68,7 @@ export default function Navbar() {
           <a
             href="/assets/resume/resume_jhadhiraj147.pdf"
             download
-            className={`${control} gap-1.5 border px-3 text-[13px] font-medium ${
+            className={`${control} gap-1.5 border px-3 text-caption font-medium ${
               scrolled ? "border-slate-400/40" : "border-slate-900/30"
             }`}
           >

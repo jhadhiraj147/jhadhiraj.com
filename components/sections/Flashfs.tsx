@@ -442,19 +442,19 @@ take the top target_rf nodes. migration is copy then drop.`;
 
 const REPO = "https://github.com/jhadhiraj147/FlashFS";
 
-const heading = "font-tech text-2xl font-semibold text-slate-900 sm:text-3xl";
-const prose = "max-w-2xl font-tech text-base/7 text-slate-700";
+const heading = "font-tech text-title font-semibold text-slate-900";
+const prose = "max-w-2xl font-tech text-body font-light text-slate-700";
 const linkClass =
-  "inline-flex items-center gap-2 font-mono text-[13px] text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent";
+  "inline-flex items-center gap-2 font-mono text-body text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent";
 
 // Paths, calls and identifiers.
 function Code({ children }: { children: string }) {
-  return <code className="whitespace-nowrap font-mono text-[0.9em] text-slate-900">{children}</code>;
+  return <code className="whitespace-nowrap font-mono text-slate-900">{children}</code>;
 }
 
 // A component named in the diagram, in the ink blue the site uses for structure.
 function Name({ children }: { children: string }) {
-  return <code className="whitespace-nowrap font-mono text-[0.9em] text-accent">{children}</code>;
+  return <code className="whitespace-nowrap font-mono text-accent">{children}</code>;
 }
 
 export default function Flashfs() {
@@ -523,7 +523,7 @@ export default function Flashfs() {
             <p className={prose}>
               Popularity sets how many replicas a chunk gets, and placement puts them near the regions reading it.
             </p>
-            <pre className="max-w-3xl overflow-x-auto rounded-md border border-slate-400/25 bg-page px-4 py-3 font-mono text-xs/5 text-slate-800">
+            <pre className="max-w-3xl overflow-x-auto rounded-md border border-slate-400/25 bg-page px-4 py-3 font-mono text-caption text-slate-800">
               <code>{PLACEMENT}</code>
             </pre>
             <p>

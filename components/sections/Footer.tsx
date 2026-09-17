@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <footer>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <p className="font-body text-xs text-ink-400">© 2026 Dhiraj Jha</p>
-        <p className="font-body text-xs text-ink-300">jhadhiraj.com</p>
+        <p className="font-body text-caption text-ink-400">© 2026 Dhiraj Jha</p>
+        <p className="font-body text-caption text-ink-300">jhadhiraj.com</p>
         <div className="flex items-center gap-1.5">
           <button
             onClick={toggleSound}

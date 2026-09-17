@@ -52,10 +52,10 @@ function NameMark() {
       transition={{ duration: 0.7, delay: 0.85, ease: [0.21, 0.47, 0.32, 0.98] }}
       className="mt-6 sm:mt-8"
     >
-      <p className="font-mono text-[clamp(1.25rem,2.4vw,2rem)] font-medium tracking-tight text-[#0d1117]">
+      <p className="font-mono text-lead sm:text-title lg:text-headline font-medium tracking-tight text-[#0d1117]">
         Dhiraj Jha
       </p>
-      <div className="mt-1 flex items-center font-mono text-[13px] text-[#0d1117]/65">
+      <div className="mt-1 flex items-center font-mono text-caption text-[#0d1117]/65">
         {available && (
           <button
             type="button"
