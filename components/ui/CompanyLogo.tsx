@@ -20,12 +20,6 @@ export function VanderbiltLogo({ size = 44 }: { size?: number }) {
  height: size,
  position: "relative",
  overflow: "hidden",
- borderRadius: 4,
- backgroundColor: "#fff",
- display: "flex",
- alignItems: "center",
- justifyContent: "center",
- padding: 3,
  }}
  >
  <Image
@@ -33,7 +27,7 @@ export function VanderbiltLogo({ size = 44 }: { size?: number }) {
  alt="Vanderbilt University"
  fill
  sizes={`${size}px`}
- style={{ objectFit: "contain", objectPosition: "center", padding: "2px" }}
+ style={{ objectFit: "contain", objectPosition: "center" }}
  />
  </div>
  );
@@ -48,8 +42,6 @@ export function OfftoflyLogo({ size = 44 }: { size?: number }) {
  height: size,
  position: "relative",
  overflow: "hidden",
- borderRadius: 4,
- backgroundColor: "#ffffff",
  }}
  >
  <Image

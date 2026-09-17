@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
@@ -38,6 +39,7 @@ const story = [
 export default function PersonalFacts() {
   const mapRef = useRef<HTMLDivElement>(null);
   const inView  = useInView(mapRef, { once: true, amount: 0.3 });
+  const still = useReducedMotion();
 
   return (
     <section className="relative section-pad overflow-hidden">
@@ -46,12 +48,10 @@ export default function PersonalFacts() {
 
         {/* Heading */}
         <AnimatedSection>
-          <div className="text-center mb-12">
-            <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl leading-none tracking-tight text-slate-900">
-              7 Countries.
-            </h2>
-            <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl leading-none tracking-tight text-ink-300">
-              One Nepali Passport.
+          <div className="text-center mb-16">
+            <h2 className="font-tech font-semibold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900">
+              <span className="block">7 Countries.</span>
+              <span className="block text-ink-300">One Nepali Passport.</span>
             </h2>
           </div>
         </AnimatedSection>
@@ -75,13 +75,14 @@ export default function PersonalFacts() {
                     return (
                       <Geography
                         key={geo.rsmKey}
+                        tabIndex={-1}
                         geography={geo}
-                        fill={visited ? "rgba(38,139,210,0.14)" : "#f1f5f9"}
-                        stroke={visited ? "#268bd2" : "#b6bfca"}
+                        fill={visited ? "rgba(63,91,123,0.16)" : "#f1f5f9"}
+                        stroke={visited ? "#3f5b7b" : "#b6bfca"}
                         strokeWidth={visited ? 0.7 : 0.35}
                         style={{
                           default: { outline: "none" },
-                          hover:   { fill: visited ? "rgba(38,139,210,0.28)" : "#dfe3e8", outline: "none" },
+                          hover:   { fill: visited ? "rgba(63,91,123,0.30)" : "#dfe3e8", outline: "none" },
                           pressed: { outline: "none" },
                         }}
                       />
@@ -95,7 +96,7 @@ export default function PersonalFacts() {
                   <motion.circle
                     r={0}
                     fill="none"
-                    stroke="#268bd2"
+                    stroke="#3f5b7b"
                     strokeWidth={1.2}
                     initial={{ r: 0, opacity: 0.8 }}
                     animate={{ r: 11, opacity: 0 }}
@@ -109,7 +110,7 @@ export default function PersonalFacts() {
                   />
                   <motion.circle
                     r={0}
-                    fill="#268bd2"
+                    fill="#3f5b7b"
                     initial={{ r: 0 }}
                     animate={{ r: 3.5 }}
                     transition={{ delay: i * 0.18, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
@@ -122,29 +123,29 @@ export default function PersonalFacts() {
 
         {/* Stats */}
         <AnimatedSection delay={0.28}>
-          <div className="flex justify-center gap-14 sm:gap-20 mt-10 mb-16">
+          <div className="flex justify-center gap-12 sm:gap-16 mt-16 mb-16">
             {[
               { value: "7",   label: "Countries"  },
               { value: "50+", label: "Cities"      },
               { value: "3",   label: "Continents" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="font-display font-bold text-4xl sm:text-5xl text-accent leading-none tabular-nums">{s.value}</p>
-                <p className="eyebrow text-ink-400 mt-2">{s.label}</p>
+                <p className="font-sans font-bold text-4xl sm:text-5xl tracking-tight text-accent leading-none tabular-nums">{s.value}</p>
+                <p className="mt-2 font-sans text-xs font-medium uppercase tracking-widest text-ink-400">{s.label}</p>
               </div>
             ))}
           </div>
         </AnimatedSection>
 
         {/* Story columns */}
-        <div className="grid lg:grid-cols-3 gap-10">
+        <div className="grid lg:grid-cols-3 gap-16">
           {story.map((s, i) => (
             <AnimatedSection key={s.title} delay={0.12 + i * 0.1}>
-              <div className="space-y-3 lg:px-8 first:lg:pl-0 last:lg:pr-0 pt-8 lg:pt-0 first:pt-0">
-                <p className="font-display font-semibold text-lg text-slate-800 tracking-tight leading-snug">
+              <div className="space-y-2">
+                <p className="font-sans font-semibold text-xl text-slate-800 tracking-tight">
                   {s.title}
                 </p>
-                <p className="font-body font-light text-sm text-ink-500 leading-relaxed">
+                <p className="max-w-md font-body font-light text-sm/6 text-ink-500">
                   {s.body}
                 </p>
               </div>
@@ -154,17 +155,19 @@ export default function PersonalFacts() {
 
         {/* Bridge to offtofly */}
         <AnimatedSection delay={0.4}>
-          <div className="text-center mt-20">
-            <p className="font-display italic text-2xl sm:text-3xl text-accent">
+          <div className="text-center mt-16">
+            <p className="font-body italic text-xl/8 sm:text-2xl/9 text-accent">
               This is where offtofly started.
             </p>
-            <motion.div
-              className="mt-6 inline-block text-ink-300"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            <motion.a
+              href="#offtofly"
+              aria-label="Continue to offtofly"
+              className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink-300 transition-colors duration-150 hover:bg-slate-900/5 hover:text-slate-900"
+              animate={still ? undefined : { y: [0, 4, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             >
-              ↓
-            </motion.div>
+              <ArrowDown size={18} strokeWidth={1.8} />
+            </motion.a>
           </div>
         </AnimatedSection>
       </div>

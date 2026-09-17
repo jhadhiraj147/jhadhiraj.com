@@ -50,12 +50,12 @@ function NameMark() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.85, ease: [0.21, 0.47, 0.32, 0.98] }}
-      className="mt-7 sm:mt-9"
+      className="mt-6 sm:mt-8"
     >
-      <p className="font-mono text-[clamp(1.35rem,2.4vw,2rem)] font-medium tracking-tight text-[#0d1117]">
+      <p className="font-mono text-[clamp(1.25rem,2.4vw,2rem)] font-medium tracking-tight text-[#0d1117]">
         Dhiraj Jha
       </p>
-      <div className="mt-2 flex items-center gap-2 font-mono text-[13px] text-[#0d1117]/65">
+      <div className="mt-1 flex items-center font-mono text-[13px] text-[#0d1117]/65">
         {available && (
           <button
             type="button"
@@ -63,11 +63,11 @@ function NameMark() {
             data-silent
             aria-label="Hear how to pronounce Dhiraj"
             title="Hear it"
-            className={`-ml-1 rounded-md p-1 transition-colors duration-200 hover:bg-slate-900/5 hover:text-[#0d1117] ${
+            className={`-ml-2 inline-flex h-8 w-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-slate-900/5 hover:text-[#0d1117] ${
               playing ? "text-[#0d1117]" : ""
             }`}
           >
-            <Volume2 size={15} strokeWidth={2} />
+            <Volume2 size={18} strokeWidth={1.8} />
           </button>
         )}
         <span>dhee &middot; ruhj</span>
@@ -112,14 +112,13 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+        className="absolute bottom-8 left-1/2 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-lg text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] transition-colors duration-150 hover:bg-white/10 hover:text-white"
       >
-        <span className="font-mono text-[10px] tracking-[0.2em] uppercase">scroll</span>
         <motion.span
-          animate={still ? undefined : { y: [0, 6, 0] }}
+          animate={still ? undefined : { y: [0, 4, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown size={16} />
+          <ArrowDown size={18} strokeWidth={1.8} />
         </motion.span>
       </motion.a>
     </section>

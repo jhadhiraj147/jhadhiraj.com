@@ -75,50 +75,60 @@ export const education = [
   },
 ];
 
+/* One entry per company, roles nested inside it, LinkedIn style: a company held
+   more than once is named once. A company with no roles shows its own period. */
 export const experiences = [
   {
-    id: "vanderbilt-swe",
+    id: "vanderbilt",
     company: "Vanderbilt University",
     logo: "vanderbilt" as const,
-    role: "Software Developer, Part Time",
-    period: "Aug 2026 - Present",
     location: "Nashville, Tennessee",
-    logoBg: "bg-white",
-    description:
-      "Building a vision system that extracts structured data from sensitive images and handwritten documents. The pipeline runs in C++ with OpenCV for document detection, image preprocessing, and OCR and handwriting recognition. Local vision language models convert the output into structured records, with confidence validation on every field. It runs entirely offline, so the data never leaves the machine.",
-  },
-  {
-    id: "vanderbilt-intern",
-    company: "Vanderbilt University",
-    logo: "vanderbilt" as const,
-    role: "Software Developer Intern",
-    period: "May 2026 - Aug 2026",
-    location: "Nashville, Tennessee",
-    logoBg: "bg-white",
-    description:
-      "Five years of biosafety compliance records were stranded in a legacy system, scattered across PDFs, scanned files and Word documents, and all of it had to reach a new platform called Onsite Systems without losing anything on the way. Almost none of it was structured. I built an ETL pipeline that runs two extractors over every document, pdfplumber and PyMuPDF, and flags the cases where the two disagree. A local LLM verifier settled the ones neither parser could resolve, which also kept sensitive records off any external network. RapidFuzz normalized the messy fields so the same lab did not arrive under three different names, and I put a single query interface in front of the result to satisfy the vendor API. Manual data entry dropped by 90 percent.",
-  },
-  {
-    id: "offtofly",
-    company: "offtofly",
-    logo: "offtofly" as const,
-    role: "Founder & Lead Engineer",
-    period: "Aug 2025 - Present",
-    location: "Nashville, Tennessee",
-    logoBg: "bg-gradient-to-br from-[#268bd2] to-[#2aa198]",
-    description:
-      "No travel tool will hand you a finished itinerary. They surface options and leave the actual planning to you. Offtofly exists to close that gap. I lead a team of five engineers building it from scratch as distributed microservices in Go, Python and C++, talking over REST and gRPC. At the centre is a graph database engine we wrote ourselves, where each experience is a node and the edges carry location, timing, pace and budget. That lets a constraint solver compose itineraries that actually hold together, instead of handing the planning to a language model and hoping.",
+    period: null,
+    roles: [
+      {
+        title: "Software Developer, Part Time",
+        period: "Aug 2026 - Present",
+        description:
+          "Building a vision system that extracts structured data from sensitive images and handwritten documents. The pipeline runs in C++ with OpenCV for document detection, image preprocessing, and OCR and handwriting recognition. Local vision language models convert the output into structured records, with confidence validation on every field. It runs entirely offline, so the data never leaves the machine.",
+      },
+      {
+        title: "Software Developer Intern",
+        period: "May 2026 - Aug 2026",
+        description:
+          "Five years of biosafety compliance records were stranded in a legacy system, scattered across PDFs, scanned files and Word documents, and all of it had to reach a new platform called Onsite Systems without losing anything on the way. Almost none of it was structured. I built an ETL pipeline that runs two extractors over every document, pdfplumber and PyMuPDF, and flags the cases where the two disagree. A local LLM verifier settled the ones neither parser could resolve, which also kept sensitive records off any external network. RapidFuzz normalized the messy fields so the same lab did not arrive under three different names, and I put a single query interface in front of the result to satisfy the vendor API. Manual data entry dropped by 90 percent.",
+      },
+    ],
   },
   {
     id: "google",
     company: "Google",
     logo: "google" as const,
-    role: "Software Developer Intern, SRE",
-    period: "May 2025 - Aug 2025",
     location: "Sunnyvale, California",
-    logoBg: "bg-white",
-    description:
-      "Built PRICELess, a pipeline that automates PRICE assessments, short for Production Risks in Core Engineering. A cycle took 15 days of manual work. It now takes 15 minutes. The pipeline drives the Workspace APIs to replace the manual emails and Buganizer follow ups, with a feedback loop that alerts owners to gaps in their answers and verifies again on resubmit. A gate at submit time runs an LLM grounded via RAG on SRE principles, which flags answers that are missing or irrelevant before a reviewer ever sees them. The synthesis stage merges PRICE dashboard metrics into one standardized report for SRE sign off. I also integrated LOAS authentication to secure service to service calls, user authorization and internal API triggers.",
+    period: null,
+    roles: [
+      {
+        title: "Software Developer Intern, SRE",
+        period: "May 2025 - Aug 2025",
+        description:
+          "Built PRICELess, a pipeline that automates PRICE assessments, short for Production Risks in Core Engineering. A cycle took 15 days of manual work. It now takes 15 minutes. The pipeline drives the Workspace APIs to replace the manual emails and Buganizer follow ups, with a feedback loop that alerts owners to gaps in their answers and verifies again on resubmit. A gate at submit time runs an LLM grounded via RAG on SRE principles, which flags answers that are missing or irrelevant before a reviewer ever sees them. The synthesis stage merges PRICE dashboard metrics into one standardized report for SRE sign off. I also integrated LOAS authentication to secure service to service calls, user authorization and internal API triggers.",
+      },
+    ],
+  },
+  {
+    id: "offtofly",
+    company: "offtofly",
+    logo: "offtofly" as const,
+    location: "Nashville, Tennessee",
+    period: null,
+    roles: [
+      {
+        title: "Founder",
+        period: "Aug 2025 - Present",
+        description:
+          "No travel tool will hand you a finished itinerary. They surface options and leave the actual planning to you. Offtofly exists to close that gap. I lead a team of five engineers building it from scratch as distributed microservices in Go, Python and C++, talking over REST and gRPC. At the centre is a graph database engine we wrote ourselves, where each experience is a node and the edges carry location, timing, pace and budget. That lets a constraint solver compose itineraries that actually hold together, instead of handing the planning to a language model and hoping.",
+        note: "I am looking for collaborators to join me on this idea.",
+      },
+    ],
   },
 ];
 

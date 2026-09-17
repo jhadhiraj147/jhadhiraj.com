@@ -9,7 +9,7 @@ const row2 = skillCategories.slice(2, 4).flatMap((c) => c.skills);
 
 function SkillPill({ skill }: { skill: string }) {
  return (
- <span className="inline-flex items-center flex-shrink-0 px-5 py-2.5 mx-2 text-sm font-medium rounded-full border border-slate-400/30 bg-page-surface text-slate-700 whitespace-nowrap select-none">
+ <span className="inline-flex h-10 flex-shrink-0 items-center rounded-full border border-slate-400/25 bg-page-surface px-4 mx-2 text-sm font-medium text-slate-700 whitespace-nowrap select-none">
  {skill}
  </span>
  );
@@ -34,7 +34,7 @@ export default function Skills() {
  id="skills"
  className="relative section-pad overflow-hidden"
  >
- <div className="max-w-6xl mx-auto">
+ <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
  <AnimatedSection>
  <SectionHeading title="Tech Stack" />
  </AnimatedSection>

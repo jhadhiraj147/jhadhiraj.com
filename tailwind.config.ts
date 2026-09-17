@@ -22,9 +22,14 @@ const config: Config = {
           400: "#8391a3",
           500: "#505b6f",
         },
+        // Muted tones that sit beside black and white photography. Each clears
+        // WCAG AA (4.6:1) on the darkest veiled backdrop, #d2d2d2.
         accent: {
-          DEFAULT: "#1b5f90",
-          cyan:    "#1b6561",
+          DEFAULT: "#3f5b7b", // ink blue: roles, links, dates
+          cyan:    "#396056", // verdigris: hover and secondary marks
+        },
+        gold: {
+          DEFAULT: "#6e5523", // antique gold: emphasis inside prose
         },
         brand: {
           50:   "#eff7ff",

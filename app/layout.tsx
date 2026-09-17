@@ -33,6 +33,7 @@ const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
   display: "swap",
   weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {

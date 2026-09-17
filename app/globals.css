@@ -53,37 +53,17 @@ body::after {
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #268bd2, #2aa198);
+  background: linear-gradient(to bottom, #3f5b7b, #396056);
   border-radius: 99px;
 }
 
 /* ─── Selection ─── */
-::selection               { background: #268bd244; color: #002b36; }
+::selection               { background: #3f5b7b33; color: #0f172a; }
 .dark ::selection         { color: #eee8d5; }
 
 /* ─── Utilities ─── */
 @layer components {
-  /* Solarized blue → cyan gradient on text */
-  .gradient-text {
-    background: linear-gradient(to right, #1b5f90, #1b6561);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    padding-bottom: 0.15em;
-    margin-bottom: -0.15em;
-  }
-
-  .section-pad { @apply py-24 px-4 sm:px-6 lg:px-8; }
-
-
-  /* Eyebrow label style - wide-tracked, geometric */
-  .eyebrow {
-    font-family: var(--font-space-grotesk), sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
+  .section-pad { @apply py-24; }
 
 
   /* ── Seamless marquee ticker ── */

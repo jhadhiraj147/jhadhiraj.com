@@ -8,7 +8,7 @@ import { education } from "@/lib/data";
 export default function Education() {
   return (
     <section id="education" className="relative section-pad">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           <SectionHeading title="Education" />
         </AnimatedSection>
@@ -16,10 +16,10 @@ export default function Education() {
         <div className="border-b border-slate-400/25">
           {education.map((edu, idx) => (
             <AnimatedSection key={edu.school} delay={0.08 + idx * 0.08} direction="up">
-              <article className="border-t border-slate-400/25 py-10 sm:py-12">
-                <div className="flex gap-4 sm:gap-6">
+              <article className="border-t border-slate-400/25 py-8">
+                <div className="flex gap-6">
                   {/* Logo sits with the school it belongs to, not stranded in its own column */}
-                  <span className="relative h-10 w-10 flex-none overflow-hidden rounded-md bg-white ring-1 ring-slate-300/60 sm:h-12 sm:w-12">
+                  <span className="relative h-12 w-12 flex-none overflow-hidden rounded-xl border border-slate-400/25 bg-white bg-clip-padding">
                     <Image
                       src={edu.logoPath}
                       alt={edu.school}
@@ -34,24 +34,24 @@ export default function Education() {
                     {/* School and location left, dates right, on one baseline */}
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                       <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h3 className="font-display text-[1.4rem] font-semibold leading-snug tracking-tight text-slate-900 sm:text-[1.7rem]">
+                        <h3 className="font-tech text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
                           {edu.school}
                         </h3>
-                        <span className="font-body text-sm text-ink-400">{edu.location}</span>
+                        <span className="font-body text-xs text-ink-400">{edu.location}</span>
                       </div>
-                      <p className="font-mono text-xs tracking-wide text-accent sm:flex-none">
+                      <p className="font-body text-xs text-accent sm:flex-none">
                         {edu.period}
                       </p>
                     </div>
 
-                    <div className="mt-3 flex flex-col gap-1.5">
+                    <div className="mt-1 flex flex-col gap-2">
                       {edu.degrees.map((degree, di) => (
                         <p
                           key={degree}
-                          className="flex items-center gap-2 font-sans text-[15px] font-medium text-slate-700"
+                          className="flex items-center gap-2 font-sans text-sm/6 font-medium text-slate-700 sm:text-base/6"
                         >
                           {di === 0 && edu.secondLogoPath && (
-                            <span className="relative inline-block h-4 w-4 flex-shrink-0 overflow-hidden rounded-[3px] bg-white ring-1 ring-slate-300/50">
+                            <span className="relative h-4 w-4 flex-none overflow-hidden rounded border border-slate-400/25 bg-white bg-clip-padding">
                               <Image
                                 src={edu.secondLogoPath}
                                 alt=""
@@ -68,14 +68,14 @@ export default function Education() {
                     </div>
 
                     {edu.highlights.length > 0 && (
-                      <ul className="mt-5 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                      <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                         {edu.highlights.map((item) => (
-                          <li key={`${item.label}-${item.sub}`} className="flex items-baseline gap-2.5">
+                          <li key={`${item.label}-${item.sub}`} className="flex items-baseline gap-3">
                             <span
                               aria-hidden
-                              className="mt-[5px] h-1 w-1 flex-shrink-0 rounded-full bg-accent-cyan"
+                              className="h-1 w-1 flex-none -translate-y-[0.125em] rounded-full bg-accent"
                             />
-                            <span className="text-[14px] leading-snug">
+                            <span className="text-sm">
                               <span className="font-sans font-medium text-slate-800">
                                 {item.label}
                               </span>
@@ -87,8 +87,8 @@ export default function Education() {
                     )}
 
                     {edu.courses.length > 0 && (
-                      <p className="mt-6 max-w-2xl font-body text-[13px] leading-relaxed text-ink-400">
-                        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-ink-400">
+                      <p className="mt-6 max-w-md font-body text-sm/6 text-ink-400">
+                        <span className="font-sans text-xs font-medium uppercase tracking-widest text-ink-400">
                           Coursework
                         </span>
                         <span aria-hidden className="mx-2 text-ink-300">

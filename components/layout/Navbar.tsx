@@ -34,13 +34,13 @@ export default function Navbar() {
       transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-page-surface/95 border-b border-slate-400/20"
+          ? "bg-page-surface/95 border-b border-slate-400/25"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <motion.a href="#" whileHover={{ scale: 1.06 }} className="flex items-center" aria-label="Top">
-          <div className="relative h-8 w-8 rounded-full overflow-hidden ring-1 ring-slate-300/70 flex-shrink-0">
+        <motion.a href="#" className="flex h-8 w-8 items-center justify-center rounded-full" aria-label="Top">
+          <div className="relative h-8 w-8 rounded-full overflow-hidden border border-slate-400/25 flex-shrink-0">
             <Image
               src="/assets/avatar.jpg"
               alt="Dhiraj Jha"
@@ -78,7 +78,7 @@ export default function Navbar() {
       </div>
 
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#268bd2] to-[#2aa198] origin-left"
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#3f5b7b] to-[#396056] origin-left"
         style={{ scaleX: progressScaleX }}
       />
     </motion.nav>

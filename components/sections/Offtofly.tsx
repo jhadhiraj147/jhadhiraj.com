@@ -12,39 +12,39 @@ const covers = [
 export default function Offtofly() {
   return (
     <section id="offtofly" className="relative section-pad overflow-hidden">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           <div className="mx-auto max-w-3xl text-center">
             <h2
-              className="text-5xl font-bold leading-none text-slate-900 sm:text-6xl"
+              className="text-5xl font-bold leading-none text-slate-900 sm:text-6xl lg:text-7xl"
               style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: "0.01em" }}
             >
               offtofly
-              <span className="ml-1 text-accent" style={{ letterSpacing: "-0.08em" }}>
+              <span className="ml-[0.1em] text-accent" style={{ letterSpacing: "-0.08em" }}>
                 &rsaquo;&rsaquo;
               </span>
             </h2>
-            <p className="mt-6 font-display text-xl italic text-slate-700 sm:text-2xl">
-              Plan it right. <span className="text-accent">Keep it alive.</span>
+            <p className="mt-6 font-body text-xl/8 italic text-slate-700 sm:text-2xl/9">
+              Plan it right. <span className="text-gold">Keep it alive.</span>
             </p>
             <a
               href="https://offtofly.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-accent transition-colors hover:text-accent-cyan"
+              className="group mt-6 inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-slate-900/30 px-4 font-sans text-sm font-medium text-slate-900 transition-colors duration-150 hover:bg-slate-900/5"
             >
               offtofly.com
               <ArrowUpRight
-                size={14}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                size={16} strokeWidth={2}
+                className="transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
             </a>
           </div>
         </AnimatedSection>
 
-        <div className="mx-auto mt-16 max-w-3xl space-y-8">
+        <div className="mx-auto mt-16 max-w-xl space-y-8">
           <AnimatedSection delay={0.05}>
-            <p className="font-body text-lg font-light leading-relaxed text-slate-600">
+            <p className="font-body text-base/7 font-light text-slate-600 sm:text-lg/8">
               Travelling is not the hard part anymore. Planning it is, and paying for it is.
               Safety and insurance are a bigger problem than either, and almost nobody deals
               with them until something has already gone wrong.
@@ -52,25 +52,25 @@ export default function Offtofly() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.1}>
-            <p className="font-body text-lg font-light leading-relaxed text-slate-600">
+            <p className="font-body text-base/7 font-light text-slate-600 sm:text-lg/8">
               offtofly takes all of it on, and builds every plan around you:
             </p>
             <ul className="mt-4 space-y-2">
               {covers.map((c) => (
-                <li key={c} className="flex items-baseline gap-3 font-body text-base font-light text-slate-600">
-                  <span aria-hidden className="h-1 w-1 flex-shrink-0 rounded-full bg-accent" />
+                <li key={c} className="flex items-baseline gap-3 font-body text-base/7 font-light text-slate-600 sm:text-lg/8">
+                  <span aria-hidden className="h-1 w-1 flex-none -translate-y-[0.125em] rounded-full bg-accent" />
                   {c}
                 </li>
               ))}
             </ul>
-            <p className="mt-4 font-body text-lg font-light leading-relaxed text-slate-600">
+            <p className="mt-4 font-body text-base/7 font-light text-slate-600 sm:text-lg/8">
               When something changes, the plan changes with it.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.15}>
-            <div className="pt-4">
-              <p className="font-display text-xl leading-relaxed text-slate-900 sm:text-2xl">
+            <div className="pt-8">
+              <p className="font-body text-xl/8 text-slate-900 sm:text-2xl/9">
                 I believe travel should not be a luxury. This planet is everyone&apos;s home, and
                 we deserve to know it better before we ultimately depart from here.
               </p>
