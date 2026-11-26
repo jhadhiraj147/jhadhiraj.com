@@ -1,38 +1,22 @@
 import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
-import SoundProvider from "@/components/ui/SoundProvider";
-import Navbar        from "@/components/layout/Navbar";
-import Hero          from "@/components/sections/Hero";
-import About         from "@/components/sections/About";
-import Skills        from "@/components/sections/Skills";
-import Experience    from "@/components/sections/Experience";
-import Projects      from "@/components/sections/Projects";
-import Flashfs       from "@/components/sections/Flashfs";
-import Education     from "@/components/sections/Education";
-import PersonalFacts from "@/components/sections/PersonalFacts";
-import Offtofly      from "@/components/sections/Offtofly";
-import Contact       from "@/components/sections/Contact";
-import Footer        from "@/components/sections/Footer";
+import Hero from "@/components/sections/Hero";
+import { personal } from "@/lib/data";
 
 export default function Home() {
   return (
-    <SoundProvider>
+    <>
       <PhotoBackdrop />
-      <Navbar />
-      <main className="relative z-10 overflow-x-hidden">
+      <noscript>
+        <style>{`body { overflow: auto; } .terminal-shell { height: auto; min-height: 100dvh; } .terminal-input-area { display: none; }`}</style>
+        <div className="relative z-20 border-b border-accent/25 bg-page px-4 py-3 text-slate-900">
+          Terminal commands need JavaScript. You can still{" "}
+          <a className="tty-link" href="/assets/resume/resume_jhadhiraj147.pdf" download>download my resume</a>{" "}
+          or <a className="tty-link" href={`mailto:${personal.email}`}>email me</a>.
+        </div>
+      </noscript>
+      <main className="relative z-10">
         <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Flashfs />
-        <Projects />
-        <Education />
-        <PersonalFacts />
-        <Offtofly />
-        <Contact />
       </main>
-      <div className="relative z-10">
-        <Footer />
-      </div>
-    </SoundProvider>
+    </>
   );
 }

@@ -10,26 +10,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Page wash sampled from the hero photograph's sky, and the ink ramp
-        // re-solved so every muted tone keeps the contrast it had on white.
+        // Semantic ink and surfaces follow the midnight terminal palette.
+        slate: {
+          50: "#0c2e37", 100: "#10333d", 200: "#1f4650",
+          300: "#315863", 400: "#527d86", 500: "#85a9af",
+          600: "#9bbbc0", 700: "#b1cecf", 800: "#c5dfdc", 900: "#d5eeea",
+          950: "#e4f5ef",
+        },
         page: {
-          DEFAULT: "#e6e6e6",
-          soft:    "#e0e0e0",
-          surface: "#f0f0f0",
+          DEFAULT: "#062832",
+          soft:    "#05232c",
+          surface: "#08343e",
         },
         ink: {
-          300: "#b6bfca",
-          400: "#8391a3",
-          500: "#505b6f",
+          300: "#81a5ad",
+          400: "#92b4bb",
+          500: "#a6c5c8",
         },
-        // Muted tones that sit beside black and white photography. Each clears
-        // WCAG AA (4.6:1) on the darkest veiled backdrop, #d2d2d2.
+        // Mint accents and cool highlights drawn from the terminal reference.
         accent: {
-          DEFAULT: "#3f5b7b", // ink blue: roles, links, dates
-          cyan:    "#396056", // verdigris: hover and secondary marks
+          DEFAULT: "#83dbc5",
+          cyan:    "#83bbc7",
         },
         gold: {
-          DEFAULT: "#6e5523", // antique gold: emphasis inside prose
+          DEFAULT: "#b0d6c9",
         },
         brand: {
           50:   "#eff7ff",
@@ -58,11 +62,9 @@ const config: Config = {
           green:   "#859900",
         },
       },
-      /* TYPE SCALE. One rule: every size is 16 x 1.25^n (the major third),
-         rounded to a whole pixel, and every line height sits on the 4px grid.
-         Each role uses exactly one step. The hero motto is the only exception. */
+      // Readable prose scale, with a 14px floor for UI labels and metadata.
       fontSize: {
-        caption:      ["13px", { lineHeight: "20px" }], // n=-1  dates, places, chips, labels, captions
+        caption:      ["14px", { lineHeight: "22px" }],
         body:         ["16px", { lineHeight: "28px" }], // n=0   every paragraph, inline code, links
         lead:         ["20px", { lineHeight: "32px" }], // n=1   role and degree lines, lead-ins, taglines
         title:        ["25px", { lineHeight: "32px" }], // n=2   every h3
@@ -72,16 +74,16 @@ const config: Config = {
         "display-lg": ["61px", { lineHeight: "64px" }], // n=6   section titles on desktop
       },
       fontFamily: {
-        // Display serif - headings, large statements, hero name
-        display: ["var(--font-playfair)", "Georgia", "serif"],
+        // Monospace headings carry the terminal character throughout the page.
+        display: ["var(--font-console)", "ui-monospace", "monospace"],
         // UI chrome - nav, buttons, labels, pills
-        sans:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
+        sans:    ["var(--font-console)", "ui-monospace", "monospace"],
         // Body prose - paragraphs, descriptions (Plex Sans, sibling of the mono)
-        body:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
+        body:    ["var(--font-console)", "ui-monospace", "monospace"],
         // Technical / monospace - labels, diagrams, code, numbers
-        mono:    ["var(--font-plex-mono)", "ui-monospace", "monospace"],
+        mono:    ["var(--font-console)", "ui-monospace", "monospace"],
         // Technical prose beside diagrams
-        tech:    ["var(--font-plex-sans)", "system-ui", "sans-serif"],
+        tech:    ["var(--font-console)", "ui-monospace", "monospace"],
       },
       animation: {
         float:        "float 6s ease-in-out infinite",

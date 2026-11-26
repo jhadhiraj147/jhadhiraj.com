@@ -1,37 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-// Display - hero name, section headings, large statements
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
+const consoleFont = localFont({
+  src: "../public/fonts/WebPlus_IBM_VGA_8x16.woff",
+  variable: "--font-console",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-});
-
-// Technical type for the systems work: labels, diagrams, code, numbers
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  variable: "--font-plex-mono",
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-// Technical prose beside the diagrams
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-plex-sans",
-  display: "swap",
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
-  title: "Dhiraj Jha | Systems Engineer",
+  title: "Terminal",
   description:
-    "Systems engineer working on Linux internals, distributed systems and backend infrastructure. CS and Math student at Fisk University, class of 2028. Software developer at Vanderbilt University, previously an SRE intern at Google. Building FlashFS and offtofly.",
+    "Dhiraj Jha — Embedded Systems | System Engineer. Software Developer (part-time) at Vanderbilt University. CS + Mathematics at Fisk University and ECE at Vanderbilt University. Graduation: May 2028. Previously an intern at Google.",
   keywords: [
     "Dhiraj Jha",
     "Systems Engineer",
@@ -47,12 +28,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Dhiraj Jha", url: "https://jhadhiraj.com" }],
   creator: "Dhiraj Jha",
-  metadataBase: new URL("https://jhadhiraj.com"),
+  metadataBase: new URL("https://www.jhadhiraj.com"),
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Dhiraj Jha | Systems Engineer",
+    title: "Dhiraj Jha | Embedded Systems | System Engineer",
     description:
-      "Systems engineer working on Linux internals, distributed systems and backend infrastructure. Software developer at Vanderbilt University, previously an SRE intern at Google. Building FlashFS and offtofly.",
-    url: "https://jhadhiraj.com",
+      "Software Developer (part-time) at Vanderbilt University. Systems software, Linux internals, and backend infrastructure. Previously a Software Developer Intern at Google.",
+    url: "https://www.jhadhiraj.com",
     siteName: "Dhiraj Jha Portfolio",
     type: "website",
     locale: "en_US",
@@ -67,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dhiraj Jha | Systems Engineer",
+    title: "Dhiraj Jha | Embedded Systems | System Engineer",
     description:
-      "Systems engineer working on Linux internals, distributed systems and backend infrastructure. Software developer at Vanderbilt, previously an SRE intern at Google.",
+      "Software Developer (part-time) at Vanderbilt University. Systems software and backend infrastructure. Previously a Software Developer Intern at Google.",
     creator: "@jhadhiraj147",
     images: ["/assets/hero/og-card.jpg"],
   },
@@ -77,12 +59,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#d5d8dc" },
-    { media: "(prefers-color-scheme: dark)",  color: "#0d1117" },
-  ],
+  themeColor: "#032630",
   width: "device-width",
   initialScale: 1,
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({
@@ -91,9 +71,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${plexMono.variable} ${plexSans.variable} scroll-smooth`}
+      className={consoleFont.variable}
     >
-      <body className="font-sans antialiased bg-page">
+      <body className="font-mono bg-page">
+        <a className="skip-link" href="#terminal-command">Skip to terminal input</a>
         {children}
       </body>
     </html>

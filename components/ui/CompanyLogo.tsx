@@ -12,7 +12,7 @@ export function GoogleLogo({ size = 28 }: { size?: number }) {
 }
 
 export function VanderbiltLogo({ size = 44 }: { size?: number }) {
- // Real Vanderbilt University logo PNG - white bg, objectFit contain
+ // Keep the original brand artwork contained within its logo tile.
  return (
  <div
  style={{
@@ -27,7 +27,7 @@ export function VanderbiltLogo({ size = 44 }: { size?: number }) {
  alt="Vanderbilt University"
  fill
  sizes={`${size}px`}
- style={{ objectFit: "contain", objectPosition: "center" }}
+ style={{ objectFit: "contain", objectPosition: "center", filter: "grayscale(1) brightness(1.7)" }}
  />
  </div>
  );

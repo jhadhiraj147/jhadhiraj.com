@@ -2,8 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
-import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps/core";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const GEO_URL = "/world-110m.json";
@@ -48,17 +47,20 @@ export default function PersonalFacts() {
 
         {/* Heading */}
         <AnimatedSection>
-          <div className="text-center mb-16">
-            <h2 className="font-tech font-semibold text-display-sm sm:text-display-md lg:text-display-lg tracking-tight text-slate-900">
+          <div className="mb-10 sm:mb-12">
+            <p aria-hidden="true" className="mb-3 font-mono text-caption text-accent">
+              <span className="mr-2 text-ink-400">$</span> cat ~/travel.log
+            </p>
+            <h2 className="font-mono text-[1.75rem] font-medium leading-tight tracking-tight text-slate-900 sm:text-[2.25rem]">
               <span className="block">7 Countries.</span>
-              <span className="block text-ink-300">One Nepali Passport.</span>
+              <span className="block text-accent">One Nepali Passport.</span>
             </h2>
           </div>
         </AnimatedSection>
 
-        {/* World map - clean atlas style on white */}
+        {/* Dark atlas, with the visited countries picked out in mint. */}
         <AnimatedSection delay={0.15}>
-          <div ref={mapRef}>
+          <div ref={mapRef} className="rounded-sm border border-accent/20 bg-page-surface/70 p-2 sm:p-4">
             <ComposableMap
               projection="geoNaturalEarth1"
               projectionConfig={{ scale: 155, center: [20, 5] }}
@@ -67,24 +69,18 @@ export default function PersonalFacts() {
               style={{ width: "100%", height: "auto", display: "block" }}
             >
               <Geographies geography={GEO_URL}>
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {({ geographies }: { geographies: any[] }) =>
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  geographies.map((geo: any) => {
+                {({ geographies }) =>
+                  geographies.map(geo => {
                     const visited = VISITED.has(String(geo.id));
                     return (
                       <Geography
                         key={geo.rsmKey}
                         tabIndex={-1}
                         geography={geo}
-                        fill={visited ? "rgba(63,91,123,0.16)" : "#f1f5f9"}
-                        stroke={visited ? "#3f5b7b" : "#b6bfca"}
+                        fill={visited ? "#286756" : "#103d46"}
+                        stroke={visited ? "#83dbc5" : "#41636a"}
                         strokeWidth={visited ? 0.7 : 0.35}
-                        style={{
-                          default: { outline: "none" },
-                          hover:   { fill: visited ? "rgba(63,91,123,0.30)" : "#dfe3e8", outline: "none" },
-                          pressed: { outline: "none" },
-                        }}
+                        className={`outline-none ${visited ? "hover:fill-[#3c8672]" : "hover:fill-[#1c515b]"}`}
                       />
                     );
                   })
@@ -96,10 +92,10 @@ export default function PersonalFacts() {
                   <motion.circle
                     r={0}
                     fill="none"
-                    stroke="#3f5b7b"
+                    stroke="#83dbc5"
                     strokeWidth={1.2}
                     initial={{ r: 0, opacity: 0.8 }}
-                    animate={{ r: 11, opacity: 0 }}
+                    animate={still ? { r: 0, opacity: 0 } : { r: 11, opacity: 0 }}
                     transition={{
                       delay: i * 0.18 + 0.2,
                       duration: 1.8,
@@ -110,7 +106,7 @@ export default function PersonalFacts() {
                   />
                   <motion.circle
                     r={0}
-                    fill="#3f5b7b"
+                    fill="#83dbc5"
                     initial={{ r: 0 }}
                     animate={{ r: 3.5 }}
                     transition={{ delay: i * 0.18, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
@@ -123,26 +119,26 @@ export default function PersonalFacts() {
 
         {/* Stats */}
         <AnimatedSection delay={0.28}>
-          <div className="flex justify-center gap-12 sm:gap-16 mt-16 mb-16">
+          <div className="my-16 grid grid-cols-3 gap-3 sm:mx-auto sm:max-w-lg sm:gap-12">
             {[
               { value: "7",   label: "Countries"  },
               { value: "50+", label: "Cities"      },
               { value: "3",   label: "Continents" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="font-sans font-bold text-display-sm sm:text-display-md tracking-tight text-accent tabular-nums">{s.value}</p>
-                <p className="mt-2 font-sans text-caption font-medium uppercase tracking-widest text-ink-400">{s.label}</p>
+                <p className="font-mono text-[2rem] font-medium tracking-tight text-accent tabular-nums sm:text-[2.5rem]">{s.value}</p>
+                <p className="mt-2 font-sans text-caption font-medium text-ink-400 sm:uppercase sm:tracking-widest">{s.label}</p>
               </div>
             ))}
           </div>
         </AnimatedSection>
 
         {/* Story columns */}
-        <div className="grid lg:grid-cols-3 gap-16">
+        <div className="grid gap-8 lg:grid-cols-3 lg:gap-10">
           {story.map((s, i) => (
             <AnimatedSection key={s.title} delay={0.12 + i * 0.1}>
-              <div className="space-y-2">
-                <p className="font-sans font-semibold text-title text-slate-800 tracking-tight">
+              <div className="space-y-3 border-t border-accent/25 pt-5">
+                <p className="font-mono text-lead font-medium tracking-tight text-slate-800">
                   {s.title}
                 </p>
                 <p className="max-w-md font-body font-light text-body text-ink-500">
@@ -159,15 +155,13 @@ export default function PersonalFacts() {
             <p className="font-body italic text-lead text-accent">
               This is where offtofly started.
             </p>
-            <motion.a
+            <a
               href="#offtofly"
               aria-label="Continue to offtofly"
-              className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink-300 transition-colors duration-150 hover:bg-slate-900/5 hover:text-slate-900"
-              animate={still ? undefined : { y: [0, 4, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              className="mt-4 inline-flex min-h-11 items-center justify-center font-mono text-caption text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
             >
-              <ArrowDown size={18} strokeWidth={1.8} />
-            </motion.a>
+              Read about offtofly
+            </a>
           </div>
         </AnimatedSection>
       </div>

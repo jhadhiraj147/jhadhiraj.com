@@ -47,8 +47,8 @@ export default function Experience() {
         <div className="space-y-16">
           {experiences.map((co, i) => (
             <AnimatedSection key={co.id} delay={i * 0.08}>
-              <article className="flex gap-6">
-                <div className="flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-xl border border-slate-400/25 bg-white bg-clip-padding">
+              <article className="flex gap-4 sm:gap-6">
+                <div className="flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-sm border border-accent/25 bg-page-surface bg-clip-padding">
                   {logoMap[co.logo]}
                 </div>
 
@@ -58,7 +58,7 @@ export default function Experience() {
                     {co.id === "offtofly" ? (
                       <OfftoflyWordmark />
                     ) : (
-                      <h3 className="font-tech text-title font-semibold tracking-tight text-slate-900">
+                      <h3 className="font-mono text-lead font-medium tracking-tight text-slate-900 sm:text-title">
                         {co.company}
                       </h3>
                     )}
@@ -72,7 +72,7 @@ export default function Experience() {
 
                   {/* Roles held there, newest first, the company name not repeated */}
                   {co.roles.length > 0 && (
-                    <div className="mt-6 space-y-8">
+                    <div className="mt-6 space-y-8 border-l border-accent/20 pl-4 sm:pl-6">
                       {co.roles.map((r) => (
                         <div key={r.title}>
                           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">

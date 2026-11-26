@@ -17,9 +17,9 @@ export default function Education() {
           {education.map((edu, idx) => (
             <AnimatedSection key={edu.school} delay={0.08 + idx * 0.08} direction="up">
               <article className="border-t border-slate-400/25 py-8">
-                <div className="flex gap-6">
+                <div className="flex gap-4 sm:gap-6">
                   {/* Logo sits with the school it belongs to, not stranded in its own column */}
-                  <span className="relative h-12 w-12 flex-none overflow-hidden rounded-xl border border-slate-400/25 bg-white bg-clip-padding">
+                  <span className="relative h-12 w-12 flex-none overflow-hidden rounded-sm border border-accent/25 bg-white bg-clip-padding">
                     <Image
                       src={edu.logoPath}
                       alt={edu.school}
@@ -34,7 +34,7 @@ export default function Education() {
                     {/* School and location left, dates right, on one baseline */}
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                       <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h3 className="font-tech text-title font-semibold tracking-tight text-slate-900">
+                        <h3 className="font-mono text-lead font-medium tracking-tight text-slate-900 sm:text-title">
                           {edu.school}
                         </h3>
                         <span className="font-body text-caption text-ink-400">{edu.location}</span>

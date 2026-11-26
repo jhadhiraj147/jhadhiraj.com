@@ -23,7 +23,7 @@ export default function About() {
           <SectionHeading title="Who Am I?" subtitle={undefined} />
         </AnimatedSection>
 
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
 
           {/* Left - narrative */}
           <div className="lg:col-span-7 space-y-8">
@@ -51,14 +51,15 @@ export default function About() {
           {/* Right - disciplines + current + next */}
           <div className="lg:col-span-5 lg:pt-1">
             <AnimatedSection delay={0.15} direction="right">
-              <div>
+              <div className="border-l border-accent/30 pl-6">
+                <p className="mb-5 font-mono text-caption text-accent">~/interests</p>
                 <ul className="space-y-3">
                   {disciplines.map((d) => (
                     <li
                       key={d}
-                      className="flex items-baseline gap-3 font-body font-light text-caption text-slate-600"
+                      className="flex items-baseline gap-3 font-mono text-caption text-slate-600"
                     >
-                      <span className="h-1 w-1 flex-none -translate-y-[0.125em] rounded-full bg-accent" />
+                      <span aria-hidden="true" className="text-accent/60">/</span>
                       {d}
                     </li>
                   ))}

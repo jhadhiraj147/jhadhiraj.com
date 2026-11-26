@@ -1,20 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Github } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
 // Page tokens, spelled out because SVG attributes cannot take Tailwind classes.
-const AMBER = "#f5b700"; // data plane lines
-const AMBER_TEXT = "#725708"; // data plane labels
-const INK_900 = "#0f172a"; // slate-900
-const INK_700 = "#334155"; // slate-700
-const INK_500 = "#505b6f"; // ink-500
-const LINE = "#64748b"; // slate-500, box strokes
-const CTRL = "#475569"; // slate-600, control plane lines
-const PAGE = "#e6e6e6"; // page
-const SURFACE = "#f0f0f0"; // page-surface
+const DATA = "#83dbc5"; // data plane lines
+const DATA_TEXT = "#a7e6d7"; // data plane labels
+const INK_900 = "#d5eeea";
+const INK_700 = "#b5d2d2";
+const INK_500 = "#9bbbc0";
+const LINE = "#3a626b";
+const CTRL = "#85a9af"; // control plane lines
+const PAGE = "#062832";
+const SURFACE = "#08343e";
 
 /* ---------- SVG primitives ---------- */
 
@@ -41,7 +41,7 @@ function Markers({ id }: { id: string }) {
         refY={5}
         orient="auto-start-reverse"
       >
-        <path d="M0 1 L10 5 L0 9 Z" fill={AMBER} />
+        <path d="M0 1 L10 5 L0 9 Z" fill={DATA} />
       </marker>
     </defs>
   );
@@ -100,10 +100,10 @@ function Key({ x, y }: { x: number; y: number }) {
 function Strike({ x, y1, y2 }: { x: number; y1: number; y2: number }) {
   return (
     <g>
-      <line x1={x} y1={y1} x2={x} y2={y2} stroke={AMBER} strokeWidth={2.5} />
+      <line x1={x} y1={y1} x2={x} y2={y2} stroke={DATA} strokeWidth={2.5} />
       <path
         d={`M${x - 6} ${y2 - 6} L${x + 6} ${y2 + 6} M${x + 6} ${y2 - 6} L${x - 6} ${y2 + 6}`}
-        stroke={AMBER_TEXT}
+        stroke={DATA_TEXT}
         strokeWidth={2}
       />
     </g>
@@ -130,8 +130,8 @@ function LaptopFull({ x, y, name }: { x: number; y: number; name: string }) {
         title="flashfs client-daemon"
         lines={["FUSE mount at /mnt/flashfs", "lowest cost replica, disposable cache"]}
       />
-      <line x1={x + 144} y1={y + 92} x2={x + 144} y2={y + 116} stroke={AMBER} strokeWidth={2} />
-      <text x={x + 150} y={y + 107} fontSize={9} fill={AMBER_TEXT}>
+      <line x1={x + 144} y1={y + 92} x2={x + 144} y2={y + 116} stroke={DATA} strokeWidth={2} />
+      <text x={x + 150} y={y + 107} fontSize={9} fill={DATA_TEXT}>
         loopback gRPC
       </text>
       <Panel
@@ -169,8 +169,8 @@ function LaptopCompact({ x, y, name }: { x: number; y: number; name: string }) {
         title="flashfs client-daemon"
         lines={["FUSE at /mnt/flashfs"]}
       />
-      <line x1={x + 83} y1={y + 72} x2={x + 83} y2={y + 92} stroke={AMBER} strokeWidth={2} />
-      <text x={x + 88} y={y + 85} fontSize={9.5} fill={AMBER_TEXT}>
+      <line x1={x + 83} y1={y + 72} x2={x + 83} y2={y + 92} stroke={DATA} strokeWidth={2} />
+      <text x={x + 88} y={y + 85} fontSize={9.5} fill={DATA_TEXT}>
         loopback
       </text>
       <Panel
@@ -191,7 +191,7 @@ function LaptopCompact({ x, y, name }: { x: number; y: number; name: string }) {
 /* ---------- The two layouts of the same figure ---------- */
 
 const ARIA =
-  "FlashFS architecture. A cloud boundary holds control-plane with Postgres, ca-signer with the CA keys, and flashfs-master made of a metadata core with its WAL and an optimizer. Laptops below each run the flashfs binary as client-daemon with a FUSE mount and node-daemon with a chunk store. Dashed lines carry metadata over gRPC and mTLS to the master. Solid amber lines carry chunks directly laptop to laptop, hole punched via ICE. No file bytes cross the cloud.";
+  "FlashFS architecture. A cloud boundary holds control-plane with Postgres, ca-signer with the CA keys, and flashfs-master made of a metadata core with its WAL and an optimizer. Laptops below each run the flashfs binary as client-daemon with a FUSE mount and node-daemon with a chunk store. Dashed lines carry metadata over gRPC and mTLS to the master. Solid mint lines carry chunks directly laptop to laptop, hole punched via ICE. No file bytes cross the cloud.";
 
 function DiagramFull() {
   const id = "ffs-l";
@@ -306,10 +306,10 @@ function DiagramFull() {
 
       {/* the invariant */}
       <Strike x={100} y1={330} y2={254} />
-      <text x={112} y={290} fontSize={11} fontWeight={600} fill={AMBER_TEXT}>
+      <text x={112} y={290} fontSize={11} fontWeight={600} fill={DATA_TEXT}>
         no file bytes
       </text>
-      <text x={112} y={305} fontSize={11} fontWeight={600} fill={AMBER_TEXT}>
+      <text x={112} y={305} fontSize={11} fontWeight={600} fill={DATA_TEXT}>
         cross the cloud
       </text>
 
@@ -319,15 +319,15 @@ function DiagramFull() {
       <LaptopFull x={656} y={330} name="laptop C" />
 
       {/* data plane: laptop to laptop only */}
-      <g fill="none" stroke={AMBER} strokeWidth={2.5} markerStart={dp} markerEnd={dp}>
+      <g fill="none" stroke={DATA} strokeWidth={2.5} markerStart={dp} markerEnd={dp}>
         <line x1={292} y1={476} x2={348} y2={476} />
         <line x1={612} y1={476} x2={668} y2={476} />
         <path d="M160 516 Q480 592 800 516" />
       </g>
-      <text x={480} y={576} fontSize={11} fontWeight={600} fill={AMBER_TEXT} textAnchor="middle">
+      <text x={480} y={576} fontSize={11} fontWeight={600} fill={DATA_TEXT} textAnchor="middle">
         chunks, direct, hole punched via ICE
       </text>
-      <text x={480} y={592} fontSize={9.5} fill={AMBER_TEXT} textAnchor="middle">
+      <text x={480} y={592} fontSize={9.5} fill={DATA_TEXT} textAnchor="middle">
         client to node, node to node
       </text>
     </svg>
@@ -405,21 +405,21 @@ function DiagramCompact() {
       </text>
 
       <Strike x={30} y1={300} y2={228} />
-      <text x={38} y={241} fontSize={9.5} fontWeight={600} fill={AMBER_TEXT}>
+      <text x={38} y={241} fontSize={9.5} fontWeight={600} fill={DATA_TEXT}>
         no file bytes
       </text>
-      <text x={38} y={254} fontSize={9.5} fontWeight={600} fill={AMBER_TEXT}>
+      <text x={38} y={254} fontSize={9.5} fontWeight={600} fill={DATA_TEXT}>
         cross the cloud
       </text>
 
       <LaptopCompact x={6} y={300} name="laptop A" />
       <LaptopCompact x={188} y={300} name="laptop B" />
 
-      <path d="M89 450 V462 H271 V450" fill="none" stroke={AMBER} strokeWidth={2.5} markerStart={dp} markerEnd={dp} />
-      <text x={180} y={478} fontSize={10} fontWeight={600} fill={AMBER_TEXT} textAnchor="middle">
+      <path d="M89 450 V462 H271 V450" fill="none" stroke={DATA} strokeWidth={2.5} markerStart={dp} markerEnd={dp} />
+      <text x={180} y={478} fontSize={10} fontWeight={600} fill={DATA_TEXT} textAnchor="middle">
         chunks, direct, hole punched via ICE
       </text>
-      <text x={180} y={492} fontSize={9.5} fill={AMBER_TEXT} textAnchor="middle">
+      <text x={180} y={492} fontSize={9.5} fill={DATA_TEXT} textAnchor="middle">
         client to node, node to node
       </text>
     </svg>
@@ -442,10 +442,10 @@ take the top target_rf nodes. migration is copy then drop.`;
 
 const REPO = "https://github.com/jhadhiraj147/FlashFS";
 
-const heading = "font-tech text-title font-semibold text-slate-900";
-const prose = "max-w-2xl font-tech text-body font-light text-slate-700";
+const heading = "font-mono text-lead font-medium text-slate-900";
+const prose = "max-w-2xl font-body text-body text-slate-700";
 const linkClass =
-  "inline-flex items-center gap-2 font-mono text-body text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent";
+  "inline-flex max-w-full items-center gap-2 font-mono text-body text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent";
 
 // Paths, calls and identifiers.
 function Code({ children }: { children: string }) {
@@ -458,21 +458,28 @@ function Name({ children }: { children: string }) {
 }
 
 export default function Flashfs() {
+  const still = useReducedMotion();
+
   return (
     <section id="flashfs" className="relative section-pad overflow-hidden">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={still ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+          transition={{ duration: still ? 0 : 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
+          <p aria-hidden="true" className="mb-4 font-mono text-caption text-accent">
+            <span className="mr-2 text-ink-400">$</span> open ~/projects/FlashFS
+          </p>
+          <h2 className="sr-only">FlashFS</h2>
           <Image
             src="/assets/flashfs_wordmark.png"
             alt="FlashFS"
             width={3828}
             height={733}
-            className="h-9 w-auto select-none sm:h-12"
+            sizes="(min-width: 640px) 251px, 188px"
+            className="h-9 w-auto select-none brightness-0 invert opacity-90 sm:h-12"
           />
         </motion.div>
 
@@ -490,7 +497,7 @@ export default function Flashfs() {
 
         <AnimatedSection delay={0.06} className="mt-16">
           <h3 className={heading}>Architecture</h3>
-          <figure className="mt-6 rounded-xl border border-slate-400/25 bg-page-surface p-2 sm:p-6">
+          <figure className="mt-6 rounded-sm border border-accent/25 bg-page-surface/95 p-2 sm:p-6">
             <DiagramFull />
             <DiagramCompact />
           </figure>
@@ -509,8 +516,8 @@ export default function Flashfs() {
               rejects any with the wrong hash.
             </p>
             <p className={prose}>
-              The dashed control path carries metadata to the master over gRPC with mTLS. The amber{" "}
-              <span style={{ color: AMBER_TEXT }}>data path</span> carries chunks directly between laptops, using ICE through NAT when
+              The dashed control path carries metadata to the master over gRPC with mTLS. The mint{" "}
+              <span style={{ color: DATA_TEXT }}>data path</span> carries chunks directly between laptops, using ICE through NAT when
               they are remote. The struck line marks the invariant:{" "}
               <strong className="font-semibold text-gold">no file bytes cross the cloud</strong>.
             </p>
@@ -523,13 +530,13 @@ export default function Flashfs() {
             <p className={prose}>
               Popularity sets how many replicas a chunk gets, and placement puts them near the regions reading it.
             </p>
-            <pre className="max-w-3xl overflow-x-auto rounded-md border border-slate-400/25 bg-page px-4 py-3 font-mono text-caption text-slate-800">
+            <pre className="max-w-3xl overflow-x-auto rounded-sm border border-accent/25 bg-page/90 px-4 py-4 font-mono text-caption text-slate-800">
               <code>{PLACEMENT}</code>
             </pre>
             <p>
               <a href={REPO} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                <Github size={14} strokeWidth={2} />
-                github.com/jhadhiraj147/FlashFS
+                <Github size={14} strokeWidth={2} className="shrink-0" />
+                <span className="min-w-0 break-all">github.com/jhadhiraj147/FlashFS</span>
               </a>
             </p>
           </div>

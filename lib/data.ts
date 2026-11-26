@@ -1,11 +1,16 @@
 export const personal = {
   name: "Dhiraj Jha",
+  focus: "Embedded Systems | System Engineer",
   email: "jhadhiraj147@gmail.com",
   location: "Nashville, TN",
   github: "https://github.com/jhadhiraj147",
   linkedin: "https://linkedin.com/in/jhadhiraj147",
   instagram: "https://instagram.com/jhadhiraj147",
-  bio: "I am an engineering student who works on systems software, backend infrastructure and automation. I automated engineering assessments at Google, moved five years of stranded records onto a new platform at Vanderbilt, and I am now building a vision system there that reads confidential documents offline. On my own time I build distributed systems in Go, C++ and Python. What holds my attention is software with real constraints behind it: correctness, reliability, latency, recovery after failure, and code someone else can still maintain a year later.",
+  currentRole: "Software Developer (part-time)",
+  currentEmployer: "Vanderbilt University",
+  currentRolePeriod: "Aug 2026 - Present",
+  expectedGraduation: "May 2028",
+  bio: "I work as a Software Developer (part-time) at Vanderbilt University, developing a Vision AI system that extracts structured data from confidential images and handwritten documents. The system uses C++, OpenCV, OCR and local vision language models, with confidence validation, entirely offline. I study Computer Science and Mathematics at Fisk University. Previously, I automated engineering assessments at Google and migrated five years of biosafety compliance records during my Vanderbilt internship. My projects include a distributed filesystem, a Linux shell and a multi-speaker audio synchronization tool.",
 };
 
 export const education = [
@@ -16,6 +21,7 @@ export const education = [
     secondLogoPath: null,
     degrees: ["Computer Science (B.S.)", "Mathematics (B.A.)"],
     period: "Aug 2024 - May 2028",
+    graduation: "May 2028",
     highlights: [
       { label: "Presidential Scholar", sub: "GPA 3.7 / 4.0" },
       { label: "Vice President", sub: "Fisk Mathematics Club" },
@@ -41,8 +47,9 @@ export const education = [
     location: "Nashville, TN",
     logoPath: "/assets/vanderbilt-logo.png",
     secondLogoPath: null,
-    degrees: ["Computer Engineering (Coursework)"],
-    period: "Jan 2025 - Present",
+    degrees: ["Electrical and Computer Engineering"],
+    period: "Jan 2025 - May 2028",
+    graduation: "May 2028",
     highlights: [],
     courses: [
       "Program Design & Algorithms",
@@ -86,10 +93,10 @@ export const experiences = [
     period: null,
     roles: [
       {
-        title: "Software Developer, Part Time",
+        title: "Software Developer (part-time)",
         period: "Aug 2026 - Present",
         description:
-          "Building a vision system that extracts structured data from sensitive images and handwritten documents. The pipeline runs in C++ with OpenCV for document detection, image preprocessing, and OCR and handwriting recognition. Local vision language models convert the output into structured records, with confidence validation on every field. It runs entirely offline, so the data never leaves the machine.",
+          "Developing a Vision AI system for structured data extraction from confidential images and handwritten documents. The C++/OpenCV pipeline handles real-time document detection, image preprocessing, and OCR and handwriting recognition. Local vision language models transform the extracted content into structured data with confidence validation, entirely offline.",
       },
       {
         title: "Software Developer Intern",
@@ -125,7 +132,7 @@ export const experiences = [
         title: "Founder",
         period: "Aug 2025 - Present",
         description:
-          "No travel tool will hand you a finished itinerary. They surface options and leave the actual planning to you. Offtofly exists to close that gap. I lead a team of five engineers building it from scratch as distributed microservices in Go, Python and C++, talking over REST and gRPC. At the centre is a graph database engine we wrote ourselves, where each experience is a node and the edges carry location, timing, pace and budget. That lets a constraint solver compose itineraries that actually hold together, instead of handing the planning to a language model and hoping.",
+          "Travel planning often means collecting options from different tools and composing the itinerary yourself. Offtofly is designed to bring that work together. I lead a team of five engineers building it from scratch as distributed microservices in Go, Python and C++, talking over REST and gRPC. At the centre is a graph database engine we wrote ourselves, where each experience is a node and the edges carry location, timing, pace and budget. That lets a constraint solver compose itineraries around those constraints.",
         note: "I am looking for collaborators to join me on this idea.",
       },
     ],
@@ -134,9 +141,19 @@ export const experiences = [
 
 export const projects = [
   {
+    title: "Minish",
+    subtitle: "Linux Shell",
+    date: "Aug 2026 - Oct 2026",
+    summary: "A C++20 Linux shell with a quote-aware parser, variable expansion, pipelines, I/O redirection, and interactive job control built on POSIX process and terminal APIs.",
+    description:
+      "A single-threaded C++20 Linux shell using fork(), execvp() and waitpid() for process execution and exit tracking. It includes a quote-aware parser, variable expansion, I/O redirection and multi-stage IPC pipelines using POSIX pipes. Background jobs and interactive job control use process groups, SIGCHLD and tcsetpgrp() for terminal handoff.",
+    tech: ["C++20", "Linux", "POSIX", "IPC", "Process Management", "Job Control"],
+  },
+  {
     title: "AutoGrocery",
     subtitle: "IoT Smart Fridge Platform",
     date: "Jan 2026 - Mar 2026",
+    summary: "An IoT grocery-platform prototype with Go services for ordering, inventory, and pricing over gRPC, PostgreSQL and Redis storage, and ZeroMQ robot dispatch.",
     description:
       "The idea was to wire smart refrigerators into online grocery platforms. The fridge notices what is running low, places the order on its own, and a warehouse robot gets dispatched to fill it. I architected three Go microservices for ordering, inventory and pricing, talking over gRPC to keep the hop between them cheap, with PostgreSQL and Redis behind them. Robot dispatch runs on ZeroMQ pub sub so the warehouse hears about an order the moment it clears. A REST gateway sits in front for authentication, order history and billing, and that is the surface users and third parties actually touch.",
     tech: ["Go", "gRPC", "ZeroMQ", "PostgreSQL", "Redis", "C++", "REST"],
@@ -145,6 +162,7 @@ export const projects = [
     title: "Bluetooth AudioSync",
     subtitle: "Multi Speaker Sync Engine",
     date: "Dec 2025 - Jan 2026",
+    summary: "A C++ audio tool that synchronizes playback across Bluetooth speakers using timestamped buffers, clock-offset estimation, and latency compensation.",
     description:
       "Bluetooth A2DP gives you nothing for keeping several speakers in step. Each device runs its own clock and they drift apart almost immediately. I wrote AudioSync in C++ to fix that. It runs concurrent playback pipelines with timestamped buffering across devices, estimates the clock offset between each speaker and a reference, then compensates for latency to hold them together in real time. The result is audible synchronisation across a multi speaker setup with nothing modified in hardware.",
     tech: ["C++", "Bluetooth A2DP", "Concurrency", "Real Time Systems", "Clock Sync"],
@@ -153,8 +171,16 @@ export const projects = [
 
 export const skillCategories = [
   {
+    label: "Languages",
+    skills: ["C++", "C", "SystemVerilog", "Python", "Go", "Bash", "AArch64 Assembly"],
+  },
+  {
     label: "Systems",
-    skills: ["C/C++", "Go", "Linux", "FUSE", "Concurrency", "Distributed Systems", "Message Queues"],
+    skills: ["C/C++", "Go", "Linux", "POSIX APIs", "Process Management", "IPC", "Multithreading", "Synchronization", "FUSE", "Concurrency", "Distributed Systems", "Message Queues"],
+  },
+  {
+    label: "Embedded & Architecture",
+    skills: ["ARM64", "Raspberry Pi 4", "Bare-Metal Development", "GPIO", "UART", "Memory-Mapped I/O"],
   },
   {
     label: "Networking",
@@ -172,7 +198,7 @@ export const skillCategories = [
   },
   {
     label: "Infrastructure & Tools",
-    skills: ["Docker", "Kubernetes", "AWS IoT", "Git"],
+    skills: ["Docker", "Kubernetes", "AWS IoT", "Git", "GCC", "Clang", "GDB", "CMake", "QEMU"],
   },
 ];
 
